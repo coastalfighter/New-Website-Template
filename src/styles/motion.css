@@ -1,0 +1,83 @@
+/* ==========================================================================
+   MOTION — §5 Motion, Scroll & Interaction System
+   Principles: connected · purposeful · playful-not-chaotic · respectful.
+   Everything here is progressive: without JS, content is fully visible.
+   ========================================================================== */
+
+/* ── Reveal on scroll (IntersectionObserver adds .is-visible) ─────────── */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--dur-slow) var(--ease-signature),
+    transform var(--dur-slow) var(--ease-signature);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.js [data-reveal="scale"] { transform: translateY(24px) scale(0.97); }
+.js [data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* Signal draw: the line scales in from the left, then a pulse travels it */
+.js [data-reveal="signal"] { opacity: 1; transform: none; }
+.js [data-reveal="signal"] .signal__line { transform: scaleX(0); transition: transform 1.6s var(--ease-signature); }
+.js [data-reveal="signal"].is-visible .signal__line { transform: scaleX(1); }
+.js [data-reveal="signal"].is-visible .signal__pulse { animation: signal-travel 2.4s var(--ease-signature) 0.4s forwards; }
+
+/* ── Split-text headline reveal (§5.3 #7: words rise from a mask) ─────── */
+.split-word { display: inline-block; overflow: clip; overflow-clip-margin: 0.2em; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split-word__inner {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform var(--dur-slow) var(--ease-signature);
+  transition-delay: calc(120ms + var(--w, 0) * var(--stagger));
+}
+.is-split.is-visible .split-word__inner { transform: none; }
+
+/* ── Keyframes ────────────────────────────────────────────────────────── */
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 60%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 8px transparent; }
+}
+@keyframes ripple {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(260%); }
+}
+@keyframes signal-travel {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* ── Page transition (§5.3 #12) — cross-document View Transitions ────────
+   Native, zero-JS, ≤ 600ms. Browsers without support simply navigate.   */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 260ms var(--ease-signature) both vt-out; }
+::view-transition-new(root) { animation: 420ms var(--ease-signature) 80ms both vt-in; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+
+/* ── Reduced motion (§5.1 #4, §13.1) ──────────────────────────────────────
+   Disable smooth scroll, pinning, parallax, globe auto-rotation, cursor,
+   marquees and transforms. Keep gentle fades that aid comprehension.     */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal], .js [data-reveal="scale"] { transform: none; transition: opacity var(--dur-base) ease; }
+  .split-word__inner { transform: none; transition: none; }
+  .js [data-reveal="signal"] .signal__line { transform: none; transition: none; }
+  .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; gap: var(--space-3) var(--space-6); padding-inline: var(--gutter); }
+  .marquee__track > [aria-hidden="true"] { display: none; }
+  .marquee { mask-image: none; }
+  .mobile-menu, .mobile-menu__list > li { transition: none; clip-path: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

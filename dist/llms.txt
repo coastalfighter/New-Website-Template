@@ -1,0 +1,15 @@
+# Akrostech
+
+> Akrostech is a backend operations partner that provides web development, recruitment assistance, virtual assistance, accounting assistance and legal assistance to growing companies in the USA, Europe, Australia and the Middle East. Its dedicated teams work during each client’s local business hours.
+
+## Services
+- [Web Development](https://www.akrostech.com/services/web-development/): Web development outsourcing is handing the design, build and upkeep of your websites and web applications to an external engineering team that works inside your tools and process.
+- [Recruitment Assistance](https://www.akrostech.com/services/recruitment-assistance/): Recruitment assistance — often called recruitment process outsourcing (RPO) support — is delegating the operational parts of hiring, such as sourcing, screening, scheduling and reporting, to an external team.
+- [Virtual Assistance](https://www.akrostech.com/services/virtual-assistance/): Virtual assistance is remote administrative and operational support — such as email, scheduling, data entry, research and customer service — delivered by a dedicated assistant working inside your tools.
+- [Accounting Assistance](https://www.akrostech.com/services/accounting-assistance/): Accounting assistance is outsourced support for day-to-day finance operations — bookkeeping, payables, receivables, payroll processing, reconciliations and reporting — performed under the review of your finance team or accountant.
+- [Legal Assistance](https://www.akrostech.com/services/legal-assistance/): Legal assistance — also known as legal process outsourcing (LPO) — is delegating legal support work such as research, document review, drafting support and administration to an external team, supervised by licensed attorneys.
+
+## Company
+- [About](https://www.akrostech.com/about/): Story, mission, values and leadership.
+- [Services overview](https://www.akrostech.com/services/): All five service pillars compared.
+- [Contact](https://www.akrostech.com/contact/): Book a free 30-minute consultation. Email hello@akrostech.com.
