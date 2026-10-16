@@ -3,6 +3,7 @@ import { esc, each } from '../lib/html.mjs';
 import { icon } from '../components/icons.mjs';
 import { button, sectionHead, pageHero, feature, ctaBanner } from '../components/ui.mjs';
 import { breadcrumbSchema } from '../components/layout.mjs';
+import { servicePillars } from '../components/hero-visuals.mjs';
 import { services } from '../data/services.mjs';
 import { modelAdvantages } from '../data/content.mjs';
 
@@ -32,15 +33,14 @@ export function render({ siteUrl }) {
   const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }];
   const body = `
 ${pageHero({
+  variant: 'services',
   kicker: 'Services',
+  badge: '5 pillars',
   title: 'Services built for *scale.*',
   sub: 'Five operational pillars, one accountable partner. Start with the function that’s slowing you down most, then add more as you grow — same team, same standards, same contract.',
   crumbs,
-  actions: `${button({ label: 'Get Started', href: '/contact/', variant: 'primary' })}`,
-  aside: `<nav class="service-index" aria-label="Jump to a service" data-reveal>
-    <p class="eyebrow">Jump to</p>
-    <ol>${each(services, (s, i) => `<li><a href="#${s.slug}"><span>${String(i + 1).padStart(2, '0')}</span>${esc(s.name)}${icon('arrowDown', { size: 16 })}</a></li>`)}</ol>
-  </nav>`,
+  actions: `${button({ label: 'Get Started', href: '/contact/', variant: 'primary' })}${button({ label: 'Compare in detail', href: '#web-development', variant: 'secondary', iconName: 'arrowDown' })}`,
+  below: `<div class="container">${servicePillars()}</div>`,
 })}
 
 <section class="section services-list" aria-label="All services">

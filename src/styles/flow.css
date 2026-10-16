@@ -1,0 +1,51 @@
+/* ==========================================================================
+   FLOW — the scroll-driven Cyber Lime + Digital Lavender layer that runs
+   behind every page (client v2). Two parts:
+   1. .flow         fixed canvas of soft flowing ribbons + orbs (flow.js)
+   2. .flow-signal  "The Signal" (§2.2): one gradient line drawn down the
+                    full length of the page as the visitor scrolls
+   Both are decorative (aria-hidden) and sit under all content.
+   ========================================================================== */
+
+.flow {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-flow);
+  pointer-events: none;
+  overflow: hidden;
+}
+/* Static fallback (no JS / before first frame): soft colour fields. */
+.flow::before, .flow::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+}
+.flow::before { width: 55vmax; height: 30vmax; top: -8vmax; right: -12vmax; background: var(--color-lime); transform: rotate(-18deg); }
+.flow::after { width: 50vmax; height: 28vmax; bottom: -10vmax; left: -14vmax; background: var(--color-lavender); transform: rotate(12deg); }
+.js .flow.is-live::before, .js .flow.is-live::after { opacity: 0; transition: opacity 1.2s ease; }
+
+.flow__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.flow.is-live .flow__canvas { opacity: 1; }
+
+.flow-signal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-flow);
+  pointer-events: none;
+  overflow: visible;
+}
+.flow-signal__track { fill: none; stroke: var(--color-ink-6); stroke-width: 2; }
+.flow-signal__path { fill: none; stroke: url(#flow-signal-gradient); stroke-width: 3; stroke-linecap: round; }
+.flow-signal__head { fill: var(--color-ink); stroke: var(--color-white); stroke-width: 3; }
+.flow-signal__halo { fill: var(--color-lime); opacity: 0.5; transform-box: fill-box; transform-origin: center; animation: ping 2s var(--ease-signature) infinite; }

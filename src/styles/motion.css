@@ -32,10 +32,24 @@
 }
 .is-split.is-visible .split-word__inner { transform: none; }
 
+/* ── Highlighter swipe: the Lime→Lavender marker draws under key words
+   once their heading is revealed. Elsewhere it is simply present. ────── */
+.js [data-reveal] .hl, .js [data-split] .hl {
+  background-size: 0% 40%;
+  transition: background-size 1s var(--ease-signature) 450ms;
+}
+.js [data-reveal].is-visible .hl, .js [data-split].is-visible .hl { background-size: 100% 40%; }
+
 /* ── Keyframes ────────────────────────────────────────────────────────── */
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes rotate { to { transform: rotate(360deg); } }
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin-rot { to { rotate: 360deg; } }
+@keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes beam { 0% { transform: translateY(-80px); } 100% { transform: translateY(520px); } }
+@keyframes current { 0% { transform: translateX(-12%) rotate(-4deg); } 100% { transform: translateX(12%) rotate(5deg); } }
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 60%, transparent); }
   70%, 100% { box-shadow: 0 0 0 8px transparent; }
@@ -74,6 +88,8 @@
   }
   .js [data-reveal], .js [data-reveal="scale"] { transform: none; transition: opacity var(--dur-base) ease; }
   .split-word__inner { transform: none; transition: none; }
+  .js [data-reveal] .hl, .js [data-split] .hl { background-size: 100% 40%; transition: none; }
+  .orbit__chips, .orbit__chip, .shield__ring { animation: none; }
   .js [data-reveal="signal"] .signal__line { transform: none; transition: none; }
   .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; gap: var(--space-3) var(--space-6); padding-inline: var(--gutter); }
   .marquee__track > [aria-hidden="true"] { display: none; }

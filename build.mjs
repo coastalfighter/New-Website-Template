@@ -29,7 +29,7 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(ROOT, 'dist');
 
 /** Stylesheets in cascade order. Each file maps to a design-system chapter. */
-export const CSS_ORDER = ['tokens.css', 'base.css', 'layout.css', 'components.css', 'sections.css', 'pages.css', 'motion.css'];
+export const CSS_ORDER = ['tokens.css', 'base.css', 'layout.css', 'flow.css', 'components.css', 'heroes.css', 'sections.css', 'pages.css', 'footer.css', 'motion.css'];
 
 /** Vendored runtime libraries (pinned in package.json, served first-party). */
 const VENDOR = [
@@ -195,8 +195,8 @@ export function build({ quiet = false } = {}) {
         description: brand.tagline,
         start_url: '/',
         display: 'standalone',
-        background_color: '#0B0B12',
-        theme_color: '#0B0B12',
+        background_color: '#FFFFFF',
+        theme_color: '#FFFFFF',
         icons: [
           { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
           { src: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },

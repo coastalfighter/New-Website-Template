@@ -14,12 +14,11 @@ export function esc(value) {
 }
 
 /**
- * Render "rich" headline copy. Words wrapped in *asterisks* become the
- * signature editorial accent (Instrument Serif italic + Aurora fill), per the
- * design system's headline treatment (§4.2).
+ * Render "rich" headline copy. Words wrapped in *asterisks* get the signature
+ * highlight: black text on a Cyber Lime → Digital Lavender marker stroke.
  */
 export function rich(text) {
-  return esc(text).replace(/\*([^*]+)\*/g, '<em class="accent">$1</em>');
+  return esc(text).replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>');
 }
 
 /** Strip the *accent* markers for places that need plain text (meta, aria). */

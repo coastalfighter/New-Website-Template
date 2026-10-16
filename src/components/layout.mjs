@@ -1,8 +1,9 @@
 /**
- * Document shell: <head> (SEO, Open Graph, fonts, JSON-LD), global header
- * with mega-menu + mobile dialog, footer, and the module entry script.
+ * Document shell: <head> (SEO, Open Graph, fonts, JSON-LD), the flowing
+ * background layer, global header with mega-menu + mobile dialog, the
+ * interactive footer, and the module entry script.
  */
-import { esc, each, jsonLd, when } from '../lib/html.mjs';
+import { esc, each, jsonLd } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
 import { button } from './ui.mjs';
 import { brand, contact, social, nav, legal, regions } from '../config.mjs';
@@ -12,32 +13,47 @@ import { services } from '../data/services.mjs';
 export const BOOT_SCRIPT = "document.documentElement.classList.replace('no-js','js')";
 
 const FONT_HREF =
-  'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap';
+  'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap';
 
-/** Brand mark: a time ring with the Signal arc — lime on ink. */
-export function logoMark(size = 32) {
+/** Brand mark: a time ring with the Signal arc in the Lime→Lavender gradient. */
+export function logoMark(size = 34, id = 'logo') {
   return `<svg class="logo__mark" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="2"/>
-    <path d="M16 3a13 13 0 0 1 12.36 8.98" fill="none" stroke="var(--color-lime)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M11.75 17.5h8.5" stroke="var(--color-lavender)" stroke-width="2.25" stroke-linecap="round"/>
+    <defs><linearGradient id="${id}-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFFF04"/><stop offset="1" stop-color="#B57EDC"/></linearGradient></defs>
+    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="2.5"/>
+    <path d="M16 3a13 13 0 0 1 11.3 19.4" fill="none" stroke="url(#${id}-g)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11.75 17.5h8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
   </svg>`;
 }
 
-function logo() {
-  return `<a class="logo" href="/" aria-label="${brand.name} — home">${logoMark()}<span class="logo__word">${brand.name}</span></a>`;
+function logo(id) {
+  return `<a class="logo" href="/" aria-label="${brand.name} — home">${logoMark(34, id)}<span class="logo__word">${brand.name}</span></a>`;
 }
 
 const isActive = (href, path) => (href === '/' ? path === '/' : path.startsWith(href));
 const current = (href, path) => (href === path ? ' aria-current="page"' : isActive(href, path) ? ' aria-current="true"' : '');
 
-/** Services mega-menu — 5 animated cards (§6.2, §12). */
+/** Decorative flowing layer behind every page (flow.css / flow.js). */
+function flowLayer() {
+  return `<div class="flow" data-flow aria-hidden="true"><canvas class="flow__canvas" data-flow-canvas></canvas></div>
+<svg class="flow-signal" data-flow-signal aria-hidden="true" focusable="false" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="flow-signal-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="4000">
+      <stop offset="0" stop-color="#CFFF04"/><stop offset=".25" stop-color="#B57EDC"/><stop offset=".5" stop-color="#CFFF04"/><stop offset=".75" stop-color="#B57EDC"/><stop offset="1" stop-color="#CFFF04"/>
+    </linearGradient>
+  </defs>
+  <path class="flow-signal__track"/>
+  <path class="flow-signal__path"/>
+  <g class="flow-signal__headgroup"><circle class="flow-signal__halo" r="14"/><circle class="flow-signal__head" r="7"/></g>
+</svg>`;
+}
+
 function megaMenu(path) {
   return `<div class="mega" id="menu-services" data-menu-panel>
     <div class="mega__inner">
       <div class="mega__intro">
         <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Five pillars · one partner</p>
-        <p class="mega__title">Everything behind the scenes, <em class="accent">handled.</em></p>
+        <p class="mega__title">Everything behind the scenes, <span class="hl">handled.</span></p>
         <a class="arrow-link" href="/services/"><span>All services</span>${icon('arrowRight', { size: 16 })}</a>
       </div>
       <ul class="mega__grid">
@@ -65,14 +81,15 @@ function header(path) {
   });
 
   return `<header class="site-header" data-header>
+    <div class="site-header__bar" aria-hidden="true"></div>
     <div class="container site-header__inner">
-      ${logo()}
+      ${logo('logo-h')}
       <nav class="site-nav" aria-label="Primary"><ul class="site-nav__list">${links}</ul></nav>
       <div class="site-header__actions">
         <p class="live-badge" data-live-clock><span class="live-badge__dot" aria-hidden="true"></span><span data-live-clock-text>Working in your time zone</span></p>
         ${button({ label: 'Book a Call', href: '/contact/', variant: 'primary', iconName: 'arrowUpRight', attrs: 'data-cta="header"' })}
         <button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="mobile-menu" data-mobile-open>
-          ${icon('menu', { size: 24 })}<span class="visually-hidden">Open menu</span>
+          ${icon('menu', { size: 22 })}<span class="visually-hidden">Open menu</span>
         </button>
       </div>
     </div>
@@ -80,17 +97,16 @@ function header(path) {
   </header>`;
 }
 
-/** Full-screen mobile menu built on <dialog> (native focus trap, Esc, inert page). */
 function mobileMenu(path) {
   return `<dialog class="mobile-menu" id="mobile-menu" aria-label="Site menu" data-mobile-menu>
     <div class="mobile-menu__inner">
       <div class="mobile-menu__top">
-        ${logo()}
-        <button class="menu-toggle menu-toggle--close" type="button" data-mobile-close>${icon('close', { size: 24 })}<span class="visually-hidden">Close menu</span></button>
+        ${logo('logo-m')}
+        <button class="menu-toggle" type="button" data-mobile-close>${icon('close', { size: 22 })}<span class="visually-hidden">Close menu</span></button>
       </div>
       <nav aria-label="Mobile">
         <ul class="mobile-menu__list">
-          ${each(nav, (item, i) => `<li style="--i:${i}"><a class="mobile-menu__link" href="${item.href}"${current(item.href, path)}><span class="mobile-menu__num">0${i + 1}</span>${esc(item.label)}</a>${
+          ${each(nav, (item, i) => `<li style="--i:${i}"><a class="mobile-menu__link" href="${item.href}"${current(item.href, path)}><span class="mobile-menu__num">0${i + 1}</span><span class="mobile-menu__label">${esc(item.label)}</span></a>${
             item.children
               ? `<ul class="mobile-menu__sub">${each(services, (s) => `<li><a href="/services/${s.slug}/"${current(`/services/${s.slug}/`, path)}>${icon(s.icon, { size: 18 })}${esc(s.name)}</a></li>`)}</ul>`
               : ''
@@ -105,39 +121,64 @@ function mobileMenu(path) {
   </dialog>`;
 }
 
+/**
+ * Interactive footer — identical on every page:
+ *  · kinetic marquee CTA whose speed and direction follow the scroll
+ *  · copy-to-clipboard email, live regional desks
+ *  · variable-weight wordmark whose letters swell toward the cursor
+ *  · back-to-top button with a scroll-progress ring
+ */
 function footer() {
   const year = new Date().getFullYear();
-  return `<footer class="site-footer">
-    <div class="site-footer__glow" aria-hidden="true"></div>
+  const phrases = ['Let’s talk', 'Book a free consultation', 'Your hours. Our horizon.', 'Scale without the overhead'];
+  const marqueeItems = (hidden) =>
+    each([...phrases, ...phrases], (p, i) => `<li class="footer-marquee__item${i % 2 ? ' footer-marquee__item--outline' : ''}"${hidden ? ' aria-hidden="true"' : ''}>${esc(p)}<span class="footer-marquee__star" aria-hidden="true">✦</span></li>`);
+
+  return `<footer class="site-footer" data-footer>
+    <div class="site-footer__spot" data-footer-spot aria-hidden="true"></div>
+    <a class="footer-marquee" href="/contact/" data-footer-marquee aria-label="Book a free consultation">
+      <ul class="footer-marquee__track" data-footer-marquee-track>${marqueeItems(false)}${marqueeItems(true)}</ul>
+    </a>
     <div class="container">
-      <div class="site-footer__top">
+      <div class="site-footer__grid">
         <div class="site-footer__brand">
-          ${logo()}
-          <p class="site-footer__tagline">${esc(brand.tagline)}</p>
+          ${logo('logo-f')}
+          <p class="site-footer__tagline">Your hours. <span class="hl">Our horizon.</span></p>
           <p class="site-footer__entity">${esc(brand.entity)}</p>
+          <button class="copy-email" type="button" data-copy="${contact.email}">
+            <span class="copy-email__icon">${icon('mail', { size: 18 })}</span>
+            <span class="copy-email__text">${contact.email}</span>
+            <span class="copy-email__hint" data-copy-hint>Copy</span>
+          </button>
           <ul class="social" aria-label="Social media">
             ${each(social, (s) => `<li><a class="social__link" href="${esc(s.href)}" rel="noopener" target="_blank">${icon(s.icon, { size: 20 })}<span class="visually-hidden">${esc(s.label)} (opens in a new tab)</span></a></li>`)}
           </ul>
         </div>
         <nav class="site-footer__col" aria-labelledby="footer-company"><h2 class="site-footer__heading" id="footer-company">Company</h2>
-          <ul>${each(nav, (n) => `<li><a href="${n.href}">${esc(n.label)}</a></li>`)}</ul>
+          <ul>${each(nav, (n) => `<li><a class="footer-link" href="${n.href}">${esc(n.label)}</a></li>`)}${each(legal, (n) => `<li><a class="footer-link" href="${n.href}">${esc(n.label)}</a></li>`)}</ul>
         </nav>
         <nav class="site-footer__col" aria-labelledby="footer-services"><h2 class="site-footer__heading" id="footer-services">Services</h2>
-          <ul>${each(services, (s) => `<li><a href="/services/${s.slug}/">${esc(s.name)}</a></li>`)}</ul>
+          <ul>${each(services, (s) => `<li><a class="footer-link" href="/services/${s.slug}/">${esc(s.name)}</a></li>`)}</ul>
         </nav>
-        <div class="site-footer__col"><h2 class="site-footer__heading">Contact</h2>
-          <ul class="site-footer__contact">
-            <li><a href="mailto:${contact.email}">${icon('mail', { size: 18 })}${contact.email}</a></li>
-            <li><a href="tel:${contact.phoneHref}">${icon('phone', { size: 18 })}${contact.phoneDisplay}</a></li>
-            <li><span>${icon('clock', { size: 18 })}${esc(contact.hours)}</span></li>
+        <div class="site-footer__col">
+          <h2 class="site-footer__heading">Live desks</h2>
+          <ul class="footer-desks">
+            ${each(regions, (r) => `<li class="footer-desk"><span class="footer-desk__city">${esc(r.city)}</span><time class="footer-desk__time" data-tz="${esc(r.tz)}">--:--</time></li>`)}
           </ul>
-          <p class="site-footer__regions"><span class="eyebrow">Regions served</span>${each(regions, (r) => `<span class="chip">${esc(r.name)}</span>`)}</p>
+          <p class="site-footer__contact"><a class="footer-link" href="tel:${contact.phoneHref}">${icon('phone', { size: 16 })}${contact.phoneDisplay}</a></p>
+          <p class="site-footer__hours">${icon('clock', { size: 16 })}${esc(contact.hours)}</p>
         </div>
       </div>
-      <div class="site-footer__wordmark" aria-hidden="true">${brand.name}</div>
+    </div>
+    <p class="footer-wordmark" data-wordmark aria-hidden="true">${[...brand.name].map((ch, i) => `<span class="footer-wordmark__char" style="--c:${i}">${ch}</span>`).join('')}</p>
+    <div class="container">
       <div class="site-footer__bottom">
         <p>© ${year} ${brand.name}. All rights reserved.</p>
         <ul class="site-footer__legal">${each(legal, (l) => `<li><a href="${l.href}">${esc(l.label)}</a></li>`)}</ul>
+        <button class="to-top" type="button" data-to-top>
+          <svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" class="to-top__track"/><circle cx="24" cy="24" r="21" class="to-top__progress" data-to-top-progress/></svg>
+          ${icon('arrowUpRight', { size: 18, className: 'to-top__icon' })}<span class="visually-hidden">Back to top</span>
+        </button>
       </div>
     </div>
   </footer>`;
@@ -145,14 +186,7 @@ function footer() {
 
 /**
  * Render a complete HTML document.
- * @param {object} page
- * @param {string} page.title        ≤ 60 chars (§8.3)
- * @param {string} page.description  ≤ 155 chars
- * @param {string} page.path         Clean URL path, e.g. "/about/"
- * @param {string} page.body         <main> contents
- * @param {object[]} [page.schema]   Extra JSON-LD objects
- * @param {string} page.siteUrl      Absolute origin
- * @param {boolean} [page.noindex]
+ * @param {object} page  { title, description, path, body, schema?, siteUrl, noindex?, pageClass? }
  */
 export function layout({ title, description, path, body, schema = [], siteUrl, noindex = false, pageClass = '' }) {
   const url = `${siteUrl}${path}`;
@@ -166,8 +200,8 @@ export function layout({ title, description, path, body, schema = [], siteUrl, n
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(url)}">
 ${noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robots" content="index, follow, max-image-preview:large">'}
-<meta name="theme-color" content="#0B0B12">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${brand.name}">
 <meta property="og:locale" content="en_US">
@@ -197,13 +231,14 @@ ${each(schema, jsonLd)}
 </head>
 <body class="${esc(pageClass)}">
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
+${flowLayer()}
 <div class="cursor" aria-hidden="true" data-cursor-el><span class="cursor__dot"></span><span class="cursor__ring"><span class="cursor__label" data-cursor-label></span></span></div>
 ${header(path)}
 <main id="main" tabindex="-1">
 ${body}
 </main>
 ${footer()}
+<div class="toast" role="status" data-toast></div>
 <div class="visually-hidden" aria-live="polite" data-announcer></div>
 <script type="module" src="/assets/js/main.js"></script>
 </body>
@@ -211,7 +246,6 @@ ${footer()}
 `;
 }
 
-/** Organization schema (§8.4) — site-wide. */
 export function organizationSchema(siteUrl) {
   return {
     '@context': 'https://schema.org',
@@ -230,7 +264,6 @@ export function organizationSchema(siteUrl) {
   };
 }
 
-/** WebPage + BreadcrumbList helpers used by individual pages. */
 export function breadcrumbSchema(siteUrl, items) {
   return {
     '@context': 'https://schema.org',
@@ -246,5 +279,3 @@ export function faqSchema(faqs) {
     mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   };
 }
-
-export { when };

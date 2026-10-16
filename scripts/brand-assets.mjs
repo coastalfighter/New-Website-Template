@@ -24,31 +24,28 @@ try {
 }
 
 const favicon = readFileSync(resolve(ROOT, 'public/favicon.svg'), 'utf8');
-const FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@600;700&display=block">';
+const FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist+Mono:wght@500&display=block">';
 
 const og = `<!doctype html><html><head>${FONTS}<style>
   *{margin:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:#0B0B12;color:#fff;font-family:'Space Grotesk',sans-serif;position:relative;overflow:hidden}
-  .glow{position:absolute;width:900px;height:900px;left:-250px;top:-450px;background:radial-gradient(circle,#B57EDC55,transparent 60%)}
-  .glow2{position:absolute;width:600px;height:600px;right:-200px;bottom:-320px;background:radial-gradient(circle,rgba(207,255,4,.14),transparent 65%)}
-  .rings{position:absolute;right:-140px;top:50%;transform:translateY(-50%);width:640px;height:640px;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
-  .rings::before{content:'';position:absolute;inset:90px;border-radius:50%;border:1px dashed rgba(255,255,255,.18)}
-  .rings::after{content:'';position:absolute;inset:200px;border-radius:50%;border:1px solid rgba(255,255,255,.1)}
-  .wrap{position:absolute;inset:72px 80px;display:flex;flex-direction:column;justify-content:space-between}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:#CFFF04;display:flex;align-items:center;gap:12px}
-  .eyebrow i{width:12px;height:12px;border-radius:50%;background:#CFFF04;box-shadow:0 0 16px #CFFF04}
-  h1{font-size:92px;line-height:1;letter-spacing:-.03em;font-weight:700;max-width:900px}
-  em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;background:linear-gradient(135deg,#CFFF04,#B57EDC);-webkit-background-clip:text;color:transparent;padding-right:6px}
+  body{width:1200px;height:630px;background:#fff;color:#0B0B12;font-family:'Bricolage Grotesque',sans-serif;position:relative;overflow:hidden}
+  .r{position:absolute;border-radius:50%;filter:blur(50px)}
+  .r1{width:900px;height:260px;left:-200px;top:-90px;background:#CFFF04;opacity:.55;transform:rotate(-8deg)}
+  .r2{width:900px;height:280px;right:-260px;bottom:-120px;background:#B57EDC;opacity:.45;transform:rotate(10deg)}
+  .wrap{position:absolute;inset:70px 80px;display:flex;flex-direction:column;justify-content:space-between}
+  .tag{align-self:flex-start;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 10px;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid rgba(11,11,18,.08);font-family:'Geist Mono',monospace;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
+  .tag b{padding:3px 10px;border-radius:999px;background:linear-gradient(120deg,#CFFF04,#E9FF8F 34%,#E7D2F5 66%,#B57EDC)}
+  h1{font-size:104px;line-height:.96;letter-spacing:-.03em;font-weight:700;max-width:1000px}
+  .hl{background:linear-gradient(100deg,rgba(207,255,4,.95),rgba(226,255,110,.9) 42%,rgba(226,200,245,.9) 64%,rgba(181,126,220,.85)) no-repeat 0 88%/100% 40%;padding:0 6px}
   .foot{display:flex;justify-content:space-between;align-items:center}
-  .brand{display:flex;align-items:center;gap:16px;font-size:36px;font-weight:700;letter-spacing:-.03em}
-  .brand svg{width:56px;height:56px}
-  .tag{font-family:'JetBrains Mono',monospace;font-size:18px;color:#A7A7B8;letter-spacing:.06em;text-transform:uppercase}
-  .signal{position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,#CFFF04,transparent);box-shadow:0 0 24px #CFFF04}
-</style></head><body><div class="glow"></div><div class="glow2"></div><div class="rings"></div>
-<div class="wrap"><p class="eyebrow"><i></i>Backend operations partner</p>
-<h1>Scale the business, <em>not</em> the headcount.</h1>
-<div class="foot"><span class="tag">Web · Recruitment · VA · Accounting · Legal</span><span class="brand">${favicon}Akrostech</span></div></div>
-<div class="signal"></div></body></html>`;
+  .brand{display:flex;align-items:center;gap:14px;font-size:38px;font-weight:800;letter-spacing:-.04em}
+  .brand svg{width:54px;height:54px}
+  .svc{font-family:'Geist Mono',monospace;font-size:18px;color:#4B4B5C;letter-spacing:.05em;text-transform:uppercase}
+</style></head><body><div class="r r1"></div><div class="r r2"></div>
+<div class="wrap"><p class="tag"><b>Live</b>Backend operations partner</p>
+<h1>Scale the business, <span class="hl">not the headcount.</span></h1>
+<div class="foot"><span class="svc">Web · Recruitment · VA · Accounting · Legal</span><span class="brand">${favicon}Akrostech</span></div></div>
+</body></html>`;
 
 const icon = (size) => `<!doctype html><html><head><style>*{margin:0}body{width:${size}px;height:${size}px;background:transparent}svg{width:${size}px;height:${size}px;display:block}</style></head><body>${favicon}</body></html>`;
 

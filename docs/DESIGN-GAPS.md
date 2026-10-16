@@ -1,27 +1,40 @@
-# Design-System Gaps
+# Design-System Gaps & Overrides
 
-`docs/website-blueprint.md` is the single source of truth for every visual decision. Where the site needed something the blueprint does not define, the value was **extrapolated from existing tokens** and marked `[GAP]` in `src/styles/tokens.css`. Add or adjust each item below in the blueprint, then update the matching token.
+`docs/website-blueprint.md` defines the palette, motion tokens and component patterns. **Client direction v2** then overrode its dark-first visual direction:
 
-| # | Gap | What the site uses now | Where | Suggested addition to the blueprint |
-|---|---|---|---|---|
-| 1 | **Breakpoints**: only "desktop 12-col / mobile 4-col" are defined | Mobile-first ladder: `640 / 768 / 1024 / 1280px` | All stylesheets | A breakpoint table (sm / md / lg / xl) |
-| 2 | **Semantic colours**: none defined (error, success, warning) | Error `#FF8FA3` (≈ 9.1:1 on Midnight Ink, tested), success = Cyber Lime | Contact form | Error / success / warning tokens with contrast pairs |
-| 3 | **Inverse button** for lime, Aurora and white surfaces (a lime button disappears on lime) | `btn--inverse`: Midnight Ink fill, white text | CTA banner, Contact "Book a meeting" card | A 4th button variant |
-| 4 | **Accent word on light sections**: the Aurora fill would put lime on white (§4.1 ❌) | Plum Shadow `#5B3A78` solid (≈ 9.1:1 on white) | `.section--light .accent` | A rule for the headline accent on light surfaces |
-| 5 | **Accent word on the Aurora CTA** | Midnight Ink serif italic | `.cta-banner__title .accent` | Same as #4 |
-| 6 | **Drop shadows**: only glass + Signal glow are defined | `--shadow-float` (menus) and `--shadow-card-light` (cards on white) | Mega-menu, use-case cards | An elevation scale for light and dark surfaces |
-| 7 | **Intermediate type sizes** (H4/card titles, lead copy, small/meta, micro) | `--text-h4` 18→21px, `--text-body-lg` 17→21px, `--text-small` 15px, `--text-micro` 12px | Cards, leads, captions | Extend the §4.2 type table |
-| 8 | **Inner-page H1 size**: the display size (96–140px) is too large for long inner-page titles | `--text-display-sm` 40→88px | `.page-hero__title` | A "display-sm" role |
-| 9 | **Hero H1 size**: 140px would push the CTAs below the fold at 1440×900 | Home hero capped at 108px | `.hero__title` | Confirm the maximum display size per viewport height |
-| 10 | **Z-index scale** | grain 1 · header 50 · menu 60 · cursor 100 | tokens.css | A layering scale |
-| 11 | **Form input styling**: §12 lists behaviours, not visuals | 52px height, 12px radius, white-12 border, lavender focus ring | Contact form | Input radius, height and states |
-| 12 | **Font choice**: "Clash Display *or* Space Grotesk" | Space Grotesk (free via Google Fonts, already the heading face) | Global | Lock the display face; Clash Display would need self-hosting and a licence |
-| 13 | **Chip on light surfaces** | `chip--plum` (white on Plum, ≈ 9.1:1) | Use-case tags | A light-surface chip variant |
-| 14 | **Live status semantics**: the header clock needed an "offline" state | Lavender dot + "Back at 09:00 your time" outside Mon–Fri 08:00–19:00 visitor-local | Header, Contact | Copy and colour for offline status |
+> Strictly white background · black text · Cyber Lime + Digital Lavender as flowing elements and gradient-highlighted text · modern, stylish fonts · a unique interactive hero on every page · an interactive footer, the same on every page.
+
+Every override and every value the blueprint does not define is marked `[GAP]` in `src/styles/tokens.css` and listed below, so the blueprint can be updated to match.
+
+## Client v2 overrides of the blueprint
+
+| Blueprint says | Site now does | Why |
+|---|---|---|
+| Midnight Ink canvas, 60/30/10 dark ratio (§4.1) | **White canvas**; Ink is used only for text and primary buttons | Client v2 |
+| Aurora gradient *filled into* headline text (§4.2) | Black text on a **Lime → Lavender highlighter stroke** (`.hl`) that swipes in on reveal | Lime text on white is 1.1:1 (§4.1 ❌). The marker keeps black text readable (17:1 on Lime, 6.6:1 on Lavender) |
+| Space Grotesk / Instrument Serif / Inter / JetBrains Mono (§4.2) | **Bricolage Grotesque** (display, variable 200–800, optical sizing) · **Geist** (body) · **Geist Mono** (labels) | Client v2: "modern and stylish" |
+| Glassmorphism on dark (§4.3) | Frosted **white** glass (`rgba(255,255,255,.62)` + 20px blur) over the flowing colour layer | Same idea, light surface |
+| WebGL globe on a dark sphere (§5.3 #3) | Light globe: white sphere, ink dots, Lavender Signal arcs, Lime/Plum markers | Sits naturally on white |
+| Film grain overlay (§4.4) | Removed | Grain greys a white canvas |
+| Straight `#CFFF04 → #B57EDC` Aurora gradient | Gradient passes through pale tints (`#E9FF8F`, `#E7D2F5`) | A direct sRGB blend of the two passes through khaki/beige |
+
+## Gaps the blueprint does not cover
+
+| # | Gap | What the site uses now |
+|---|---|---|
+| 1 | **Breakpoints** | Mobile-first: `640 / 768 / 1024 / 1280px` |
+| 2 | **Readable neutrals on white**: Mist `#A7A7B8` is 2.3:1 on white | Graphite `#4B4B5C` (secondary, 8.2:1) and Slate `#6B6B7D` (tertiary, 5.3:1). Mist is used for decoration only |
+| 3 | **Semantic colours** | Error `#B3203F` (tested ≥ 4.5:1 on white). Success uses Plum or Lime chips |
+| 4 | **Button on white**: a lime button has no visible edge on white | Primary = ink pill with a Lime→Lavender sweep on hover; Secondary = ink outline |
+| 5 | **Elevation scale** | `--shadow-sm / md / lg` and a Lime/Lavender `--shadow-glow` |
+| 6 | **Intermediate type sizes** (H4, lead, small, micro) | `--text-h4`, `--text-body-lg`, `--text-small`, `--text-micro` |
+| 7 | **Display sizes**: 140px pushes the home CTAs below the fold | Home H1 up to 104px; inner-page H1 up to 104px via `--text-display-sm` |
+| 8 | **Z-index scale** | flow 0 · content 1 · header 50 · menu 60 · cursor 100 |
+| 9 | **Form inputs** | 54px height, 14px radius, ink focus border with a Lime focus halo |
+| 10 | **Live-status colour** | Lime dot = online, Lavender dot = off-hours |
 
 ## Brief vs. blueprint decisions to confirm
 
-- **Entity statement**: the blueprint's canonical sentence says "India-based outsourcing company". The new brief positions Akrostech as a "backend operations partner" and doesn't mention India, so `src/config.mjs → brand.entity` uses that framing. India appears only as the origin of the hero globe’s Signal arcs. Pick one wording and use it everywhere (§10.2).
-- **Insights section**: the blueprint includes `/insights`, but the brief's page list doesn't. It isn't built, and nothing links to it.
-- **WebGL globe on mobile**: the blueprint suggests a pre-rendered video on mobile. The site uses the same lightweight globe (cobe, ~6 KB gzipped) at reduced detail, and skips WebGL entirely on Save-Data. The CSS poster stays in place until WebGL is ready.
-- **Copyright year**: the brief asked for "© 2025". The footer renders the build year (currently 2026) so it never goes stale.
+- **Entity statement**: the blueprint says "India-based outsourcing company"; the site uses the brief's "backend operations partner" framing. Pick one and use it everywhere (§10.2).
+- **Insights section**: in the blueprint, not in the brief. Not built.
+- **Copyright year**: rendered from the build date so it never goes stale.

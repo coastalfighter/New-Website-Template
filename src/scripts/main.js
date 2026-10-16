@@ -14,12 +14,18 @@ import { initCarousels } from './modules/carousel.js';
 import { initContactForm } from './modules/form.js';
 import { initGlobe } from './modules/globe.js';
 import { initScroll } from './modules/scroll.js';
+import { initFlow } from './modules/flow.js';
+import { initHeroes } from './modules/heroes.js';
+import { initFooter } from './modules/footer.js';
 
 const tasks = [
   ['nav', initNav],
+  ['flow', initFlow],
   ['reveal', initReveal],
   ['clocks', initClocks],
   ['counters', initCounters],
+  ['heroes', initHeroes],
+  ['footer', initFooter],
   ['form', initContactForm],
   ['carousel', initCarousels],
   ['pointer', initPointer],

@@ -3,6 +3,7 @@ import { esc, each } from '../lib/html.mjs';
 import { icon } from '../components/icons.mjs';
 import { button, sectionHead, pageHero, faqList, eyebrow } from '../components/ui.mjs';
 import { breadcrumbSchema, faqSchema } from '../components/layout.mjs';
+import { contactBeacon } from '../components/hero-visuals.mjs';
 import { services } from '../data/services.mjs';
 import { contactFaqs, budgetOptions } from '../data/content.mjs';
 import { contact, regions } from '../config.mjs';
@@ -90,16 +91,14 @@ export function render({ siteUrl }) {
   const crumbs = [{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact/' }];
   const body = `
 ${pageHero({
+  variant: 'contact',
   kicker: 'Contact',
+  badge: 'Free',
   title: 'Let’s build something *together.*',
   sub: 'Book a free 30-minute consultation or send us a message. We’ll talk in your time zone, about your operations — and you’ll leave with a clear plan either way.',
   crumbs,
-  className: 'page-hero--contact',
-  aside: `<div class="tz-card" data-reveal data-timezone>
-    <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>The signal has reached you</p>
-    <p class="tz-card__line" data-tz-line>Our team works during <strong>your</strong> business hours — wherever you are.</p>
-    <p class="tz-card__meta" data-tz-meta>Typically replies within 1 business hour.</p>
-  </div>`,
+  actions: `${button({ label: 'Send a message', href: '#contact-form', variant: 'primary', iconName: 'arrowDown' })}${button({ label: 'Book a meeting', href: contact.bookingUrl, variant: 'secondary', iconName: 'calendar', attrs: 'rel="noopener" target="_blank"' })}`,
+  visual: contactBeacon(),
 })}
 
 <section class="section contact" aria-label="Contact options">

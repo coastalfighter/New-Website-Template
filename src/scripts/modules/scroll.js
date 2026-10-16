@@ -45,15 +45,12 @@ function initProcess(gsap, ScrollTrigger) {
 }
 
 function initParallax(gsap) {
-  const hero = $('.hero');
-  if (hero) {
+  // Hero visuals drift slower than the copy — depth without distraction.
+  for (const hero of $$('[data-hero]')) {
+    const visual = $('.hero__visual', hero);
     const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
-    gsap.to('.hero__visual', { yPercent: 14, ease: 'none', scrollTrigger: scrub });
-    gsap.to('.hero__glow--lavender', { yPercent: 30, ease: 'none', scrollTrigger: { ...scrub } });
-    gsap.to('.hero__content', { opacity: 0.25, yPercent: -6, ease: 'none', scrollTrigger: { ...scrub, start: '30% top' } });
-  }
-  for (const rings of $$('.page-hero__bg .time-rings, .cta-banner__rings')) {
-    gsap.to(rings, { rotate: 40, ease: 'none', scrollTrigger: { trigger: rings.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } });
+    if (visual) gsap.to(visual, { yPercent: 12, ease: 'none', scrollTrigger: scrub });
+    gsap.to($('.hero__content', hero), { yPercent: -8, opacity: 0.35, ease: 'none', scrollTrigger: { ...scrub, start: '35% top' } });
   }
 }
 

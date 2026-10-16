@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BASE — modern reset, document defaults, typography, accessibility helpers
+   BASE — reset, document, typography, highlight treatment, a11y helpers
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -8,25 +8,24 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  color-scheme: dark;
+  color-scheme: light;
   scroll-padding-top: calc(var(--header-h) + var(--space-5));
-  interpolate-size: allow-keywords; /* enables height:auto transitions (FAQ) */
+  interpolate-size: allow-keywords;
   hanging-punctuation: first last;
+  background: var(--surface-canvas);
 }
-
 @media (prefers-reduced-motion: no-preference) {
   html:not(.lenis) { scroll-behavior: smooth; }
 }
 
 body {
+  position: relative;
   min-height: 100svh;
   background: var(--surface-canvas);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-body);
-  font-weight: var(--weight-regular);
   line-height: var(--leading-body);
-  font-feature-settings: 'ss01', 'cv11';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -45,49 +44,52 @@ p, li, h1, h2, h3, h4, blockquote { overflow-wrap: break-word; }
 h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
-/* ── Headings (§4.2: Space Grotesk 600, tight tracking) ───────────────── */
+/* ── Display & headings: Bricolage Grotesque, optical size + tight tracking */
 h1, h2, h3, h4, .display {
   font-family: var(--font-display);
   font-weight: var(--weight-semibold);
+  font-optical-sizing: auto;
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-display);
+  color: var(--text-primary);
 }
 .display {
   font-size: var(--text-display);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
+  letter-spacing: -0.03em;
 }
-h2 { font-size: var(--text-h2); }
-h3 { font-size: var(--text-h3); }
+h2 { font-size: var(--text-h2); font-weight: var(--weight-bold); }
+h3 { font-size: var(--text-h3); letter-spacing: -0.025em; }
 
-/* Signature headline treatment (§4.2): one word in Instrument Serif italic,
-   filled with the Aurora gradient. On light sections the gradient would put
-   lime on white (§4.1 ❌), so it switches to Plum Shadow there. */
-.accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: var(--weight-regular);
-  letter-spacing: -0.01em;
-  padding-inline-end: 0.06em; /* keeps italic overhang from clipping */
-  background: var(--gradient-aurora);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* ── Signature highlight: black text on a Lime → Lavender marker stroke.
+   The marker "swipes" in when its block becomes visible (motion.css).    */
+.accent, .hl {
+  position: relative;
+  color: inherit;
+  font-style: normal;
+  padding-inline: 0.08em;
+  margin-inline: -0.04em;
+  background-image: var(--gradient-highlight);
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 40%;
+  border-radius: 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
-@supports not (background-clip: text) { .accent { color: var(--color-lime); } }
 
 ::selection { background: var(--color-lime); color: var(--color-ink); }
 
-/* ── Focus (§12: visible lavender 3px ring) ───────────────────────────── */
+/* ── Focus ────────────────────────────────────────────────────────────── */
 :focus { outline: none; }
 :focus-visible {
   outline: 3px solid var(--color-lavender);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
-.section--light :focus-visible { outline-color: var(--color-plum); }
 
-/* ── Accessibility helpers ────────────────────────────────────────────── */
+/* ── A11y helpers ─────────────────────────────────────────────────────── */
 .visually-hidden {
   position: absolute !important;
   width: 1px; height: 1px;
@@ -98,7 +100,6 @@ h3 { font-size: var(--text-h3); }
   white-space: nowrap;
   border: 0;
 }
-
 .skip-link {
   position: fixed;
   top: var(--space-3);
@@ -106,36 +107,20 @@ h3 { font-size: var(--text-h3); }
   z-index: calc(var(--z-cursor) + 1);
   padding: var(--space-3) var(--space-5);
   border-radius: var(--radius-pill);
-  background: var(--color-lime);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-white);
   font-weight: var(--weight-semibold);
   transform: translateY(-200%);
   transition: transform var(--dur-fast) var(--ease-signature);
 }
-.skip-link:focus-visible { transform: translateY(0); }
-
+.skip-link:focus-visible { transform: none; }
 main:focus { outline: none; }
 
-/* ── Film grain overlay (§4.4: 3–4% on dark sections) ─────────────────── */
-.grain {
-  position: fixed;
-  inset: -50%;
-  z-index: var(--z-grain);
-  pointer-events: none;
-  opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ── Long-form prose ──────────────────────────────────────────────────── */
+/* ── Prose ────────────────────────────────────────────────────────────── */
 .prose { max-width: 68ch; color: var(--text-secondary); }
 .prose > * + * { margin-top: var(--space-5); }
-.prose h2 {
-  margin-top: var(--space-8);
-  font-size: var(--text-h3);
-  color: var(--text-primary);
-}
-.prose a { color: var(--color-lime); text-decoration: underline; text-underline-offset: 0.2em; }
+.prose h2 { margin-top: var(--space-8); font-size: var(--text-h3); }
+.prose a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-lavender); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
 .prose strong { color: var(--text-primary); }
 
-/* Native form control accent */
-:root { accent-color: var(--color-lime); }
+:root { accent-color: var(--color-plum); }

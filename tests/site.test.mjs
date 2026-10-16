@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { build, bootScriptHash, contentSecurityPolicy, minifyCss } from '../build.mjs';
+import { build, bootScriptHash, contentSecurityPolicy, minifyCss, CSS_ORDER as CSS_FILES } from '../build.mjs';
 import { services } from '../src/data/services.mjs';
 import { resolveSiteUrl } from '../src/lib/env.mjs';
 import { esc, rich, plain } from '../src/lib/html.mjs';
@@ -178,8 +178,8 @@ describe('helpers', () => {
   test('esc() neutralises HTML', () => {
     assert.equal(esc(`<script>"x" & 'y'</script>`), '&lt;script&gt;&quot;x&quot; &amp; &#39;y&#39;&lt;/script&gt;');
   });
-  test('rich() renders the editorial accent safely', () => {
-    assert.equal(rich('Scale *fast* <b>'), 'Scale <em class="accent">fast</em> &lt;b&gt;');
+  test('rich() renders the gradient highlight safely', () => {
+    assert.equal(rich('Scale *fast* <b>'), 'Scale <span class="hl">fast</span> &lt;b&gt;');
     assert.equal(plain('Scale *fast*'), 'Scale fast');
   });
   test('resolveSiteUrl() validates and normalises', () => {
@@ -214,23 +214,37 @@ describe('design tokens (§4.1 contrast rules, WCAG 2.2 AA)', () => {
     assert.equal(token('color-plum').toUpperCase(), '#5B3A78');
   });
 
+  // Light edition: every text pairing sits on the white canvas (or on a
+  // Lime / Lavender highlight behind black text).
   const pairs = [
-    ['color-lime', 'color-ink', 'Lime on Midnight'],
-    ['color-white', 'color-ink', 'White on Midnight'],
-    ['color-lavender', 'color-ink', 'Lavender on Midnight'],
-    ['color-mist', 'color-ink', 'Mist on Midnight (secondary text)'],
-    ['color-mist', 'color-obsidian', 'Mist on Obsidian (secondary text on cards)'],
-    ['color-ink', 'color-lavender', 'Midnight on Lavender (chips)'],
-    ['color-plum', 'color-white', 'Plum on White (accent on light sections)'],
-    ['color-white', 'color-plum', 'White on Plum (plum chips)'],
-    ['color-error', 'color-ink', 'Error on Midnight'],
+    ['color-ink', 'color-white', 'Ink text on white'],
+    ['color-graphite', 'color-white', 'Secondary text on white'],
+    ['color-slate', 'color-white', 'Tertiary text on white'],
+    ['color-plum', 'color-white', 'Plum accent text on white'],
+    ['color-error', 'color-white', 'Error text on white'],
+    ['color-ink', 'color-lime', 'Ink on Lime highlight / chips'],
+    ['color-ink', 'color-lavender', 'Ink on Lavender highlight / chips'],
+    ['color-white', 'color-ink', 'White on ink buttons'],
   ];
   for (const [fg, bg, label] of pairs) {
     test(`${label} ≥ 4.5:1`, () => assert.ok(ratio(token(fg), token(bg)) >= 4.5, `${label}: ${ratio(token(fg), token(bg)).toFixed(2)}`));
   }
 
-  test('no stylesheet puts lime text on a white surface', () => {
-    const light = read(join(ROOT, 'src/styles/layout.css'));
-    assert.match(light, /\.section--light \.accent \{[^}]*color: var\(--color-plum\)/);
+  test('the canvas is white and text is ink', () => {
+    assert.match(css, /--surface-canvas: var\(--color-white\)/);
+    assert.match(css, /--text-primary: var\(--color-ink\)/);
+  });
+
+  test('highlighted text keeps ink colour (never lime/lavender text on white)', () => {
+    const base = read(join(ROOT, 'src/styles/base.css'));
+    assert.match(base, /\.accent, \.hl \{[^}]*color: inherit/);
+    // Lime/Lavender may colour icons only when they sit on an ink surface.
+    const INK_CONTEXTS = ['.pipeline__hire .icon'];
+    const all = CSS_FILES.map((f) => read(join(ROOT, 'src/styles', f))).join('\n');
+    const offenders = [...all.matchAll(/([^{}]+)\{([^}]*)\}/g)]
+      .filter(([, , body]) => /(?<![-\w])color:\s*var\(--color-(lime|lavender)\)/.test(body))
+      .filter(([, sel, body]) => !/background:\s*var\(--color-ink\)/.test(body) && !INK_CONTEXTS.includes(sel.trim()))
+      .map(([, sel]) => sel.trim());
+    assert.deepEqual(offenders, [], 'lime/lavender text must sit on ink');
   });
 });

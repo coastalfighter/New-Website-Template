@@ -2,7 +2,33 @@
 
 The marketing site for **Akrostech**, the backend operations partner for growing companies. It has 12 static pages (Home, About, Services, 5 service pages, Contact, Privacy, Terms, 404). The HTML, CSS and JavaScript are plain and framework-free, generated from typed data by a zero-dependency Node script.
 
-> **Design source of truth:** [`docs/website-blueprint.md`](docs/website-blueprint.md). Every colour, font, spacing, radius and motion value maps to a token in `src/styles/tokens.css`. Anything the blueprint doesn't define is listed in [`docs/DESIGN-GAPS.md`](docs/DESIGN-GAPS.md).
+> **Design source of truth:** [`docs/website-blueprint.md`](docs/website-blueprint.md), with the client's v2 direction layered on top: a strictly white canvas, black text, flowing Cyber Lime + Digital Lavender elements, gradient-highlighted words, and Bricolage Grotesque + Geist type. Every value maps to a token in `src/styles/tokens.css`. Overrides and gaps are listed in [`docs/DESIGN-GAPS.md`](docs/DESIGN-GAPS.md).
+
+## The experience at a glance
+
+| Page | Interactive hero |
+|---|---|
+| Home | Light WebGL globe with Lavender "Signal" arcs, the five services orbiting it (hover pauses, chips link to the service pages), a word cycler and live regional clocks |
+| About | Draggable 24-hour dial ("We chose your clock"). Drag or use the arrow keys, and it tells you whether the team is online at that hour |
+| Services | Five expanding pillars that open on hover or focus |
+| Web Development | A code editor types a page while the live preview builds alongside it |
+| Recruitment | Candidates flow through a live hiring pipeline; the counters tick up |
+| Virtual Assistance | A to-do list that clears itself. Click a task to hand it over, and the hours-saved counter rises |
+| Accounting | A revenue chart that grows in. Hover a month to inspect it |
+| Legal | A contract reviewed clause by clause, with attorney notes |
+| Contact | A dot field that ripples from the cursor around the visitor's live local time |
+| Privacy / Terms / 404 | A shield that watches the cursor, a fanned document stack, and "404" digits that scatter |
+
+**On every page:**
+- Soft lime and lavender ribbons drift behind the content and travel with the scroll (`flow.js`).
+- A gradient "Signal" line draws itself down the full page as you read.
+- Key words get a highlighter swipe when they appear.
+
+**Footer (identical everywhere):**
+- A kinetic marquee whose speed and direction follow your scrolling.
+- A cursor spotlight.
+- A variable-weight wordmark that swells toward the pointer.
+- Copy-email with a toast, live regional desk clocks, and back-to-top with a progress ring.
 
 ---
 
@@ -37,15 +63,16 @@ Set `SITE_URL` (see `.env.example`) to your production origin before building. I
 │   │   ├── services.mjs       # All 5 services: copy, deliverables, process, use cases, FAQs, SEO
 │   │   └── content.mjs        # Stats, testimonials, values, team, FAQs (placeholders flagged)
 │   ├── components/
-│   │   ├── layout.mjs         # <head>/SEO/Open Graph, header + mega-menu + mobile dialog, footer, schema
+│   │   ├── layout.mjs         # <head>/SEO/Open Graph, flow layer, header + mega-menu + mobile dialog, interactive footer, schema
+│   │   ├── hero-visuals.mjs   # The unique interactive centrepiece for every page
 │   │   ├── ui.mjs             # Button, section head, page hero, FAQ, CTA banner, cards, Signal…
 │   │   └── icons.mjs          # 1.5px-stroke icon set (§11.3)
 │   ├── pages/                 # home · about · services · service (template) · contact · legal
 │   ├── lib/                   # html escaping helpers, .env loader
-│   ├── styles/                # tokens → base → layout → components → sections → pages → motion
+│   ├── styles/                # tokens → base → layout → flow → components → heroes → sections → pages → footer → motion
 │   └── scripts/               # Browser ES modules (copied to dist/assets/js)
 │       ├── main.js
-│       └── modules/           # nav · reveal · counters · clocks · globe · pointer · carousel · scroll · form · validation · confetti
+│       └── modules/           # flow · heroes · footer · nav · reveal · counters · clocks · globe · pointer · carousel · scroll · form · validation · confetti
 ├── public/                    # Favicons, OG image, logo (copied verbatim)
 ├── scripts/
 │   ├── serve.mjs              # Local preview server (clean URLs, real 404, prod headers)

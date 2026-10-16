@@ -7,8 +7,8 @@
 <meta name="description" content="Akrostech builds dedicated operations teams for growing companies — the middle ground between overpriced consultancies and unreliable freelancers.">
 <link rel="canonical" href="https://www.akrostech.com/about/">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0B0B12">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Akrostech">
 <meta property="og:locale" content="en_US">
@@ -29,7 +29,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap">
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="modulepreload" href="/assets/js/main.js">
 <script>document.documentElement.classList.replace('no-js','js')</script>
@@ -38,15 +38,27 @@
 </head>
 <body class="page-about">
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
+<div class="flow" data-flow aria-hidden="true"><canvas class="flow__canvas" data-flow-canvas></canvas></div>
+<svg class="flow-signal" data-flow-signal aria-hidden="true" focusable="false" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="flow-signal-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="4000">
+      <stop offset="0" stop-color="#CFFF04"/><stop offset=".25" stop-color="#B57EDC"/><stop offset=".5" stop-color="#CFFF04"/><stop offset=".75" stop-color="#B57EDC"/><stop offset="1" stop-color="#CFFF04"/>
+    </linearGradient>
+  </defs>
+  <path class="flow-signal__track"/>
+  <path class="flow-signal__path"/>
+  <g class="flow-signal__headgroup"><circle class="flow-signal__halo" r="14"/><circle class="flow-signal__head" r="7"/></g>
+</svg>
 <div class="cursor" aria-hidden="true" data-cursor-el><span class="cursor__dot"></span><span class="cursor__ring"><span class="cursor__label" data-cursor-label></span></span></div>
 <header class="site-header" data-header>
+    <div class="site-header__bar" aria-hidden="true"></div>
     <div class="container site-header__inner">
-      <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="2"/>
-    <path d="M16 3a13 13 0 0 1 12.36 8.98" fill="none" stroke="var(--color-lime)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M11.75 17.5h8.5" stroke="var(--color-lavender)" stroke-width="2.25" stroke-linecap="round"/>
+      <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="logo-h-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFFF04"/><stop offset="1" stop-color="#B57EDC"/></linearGradient></defs>
+    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="2.5"/>
+    <path d="M16 3a13 13 0 0 1 11.3 19.4" fill="none" stroke="url(#logo-h-g)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11.75 17.5h8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
   </svg><span class="logo__word">Akrostech</span></a>
       <nav class="site-nav" aria-label="Primary"><ul class="site-nav__list"><li class="site-nav__item"><a class="site-nav__link" href="/">Home</a></li><li class="site-nav__item"><a class="site-nav__link" href="/about/" aria-current="page">About</a></li><li class="site-nav__item site-nav__item--menu" data-menu>
         <a class="site-nav__link" href="/services/">Services</a>
@@ -57,7 +69,7 @@
     <div class="mega__inner">
       <div class="mega__intro">
         <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Five pillars · one partner</p>
-        <p class="mega__title">Everything behind the scenes, <em class="accent">handled.</em></p>
+        <p class="mega__title">Everything behind the scenes, <span class="hl">handled.</span></p>
         <a class="arrow-link" href="/services/"><span>All services</span><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg></a>
       </div>
       <ul class="mega__grid">
@@ -85,24 +97,25 @@
         <p class="live-badge" data-live-clock><span class="live-badge__dot" aria-hidden="true"></span><span data-live-clock-text>Working in your time zone</span></p>
         <a class="btn btn--primary" href="/contact/" data-magnetic data-cta="header"><span class="btn__label">Book a Call</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></a>
         <button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="mobile-menu" data-mobile-open>
-          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.75 7.5h16.5M3.75 16.5h16.5"/></svg><span class="visually-hidden">Open menu</span>
+          <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.75 7.5h16.5M3.75 16.5h16.5"/></svg><span class="visually-hidden">Open menu</span>
         </button>
       </div>
     </div>
     <dialog class="mobile-menu" id="mobile-menu" aria-label="Site menu" data-mobile-menu>
     <div class="mobile-menu__inner">
       <div class="mobile-menu__top">
-        <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="2"/>
-    <path d="M16 3a13 13 0 0 1 12.36 8.98" fill="none" stroke="var(--color-lime)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M11.75 17.5h8.5" stroke="var(--color-lavender)" stroke-width="2.25" stroke-linecap="round"/>
+        <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="logo-m-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFFF04"/><stop offset="1" stop-color="#B57EDC"/></linearGradient></defs>
+    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="2.5"/>
+    <path d="M16 3a13 13 0 0 1 11.3 19.4" fill="none" stroke="url(#logo-m-g)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11.75 17.5h8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
   </svg><span class="logo__word">Akrostech</span></a>
-        <button class="menu-toggle menu-toggle--close" type="button" data-mobile-close><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg><span class="visually-hidden">Close menu</span></button>
+        <button class="menu-toggle" type="button" data-mobile-close><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg><span class="visually-hidden">Close menu</span></button>
       </div>
       <nav aria-label="Mobile">
         <ul class="mobile-menu__list">
-          <li style="--i:0"><a class="mobile-menu__link" href="/"><span class="mobile-menu__num">01</span>Home</a></li><li style="--i:1"><a class="mobile-menu__link" href="/about/" aria-current="page"><span class="mobile-menu__num">02</span>About</a></li><li style="--i:2"><a class="mobile-menu__link" href="/services/"><span class="mobile-menu__num">03</span>Services</a><ul class="mobile-menu__sub"><li><a href="/services/web-development/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.75" y="4" width="18.5" height="16" rx="2.5"/><path d="M2.75 8.5h18.5"/><path d="m9.5 12.5-2.25 2.25L9.5 17"/><path d="m14.5 12.5 2.25 2.25L14.5 17"/><circle cx="5.75" cy="6.25" r=".4" fill="currentColor"/><circle cx="7.75" cy="6.25" r=".4" fill="currentColor"/></svg>Web Development</a></li><li><a href="/services/recruitment-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7.5" r="3.25"/><path d="M3.25 20c.6-3.4 2.9-5.5 5.75-5.5 1.3 0 2.5.4 3.4 1.2"/><path d="M15 13.5v3.25a2.75 2.75 0 0 0 5.5 0V13.5"/><path d="M15 13.5h1.75M18.75 13.5h1.75"/><path d="M15 11.25v-1M20.5 11.25v-1"/></svg>Recruitment Assistance</a></li><li><a href="/services/virtual-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 2.75v3.5M16 2.75v3.5"/><path d="m9 15 2 2 4-4"/></svg>Virtual Assistance</a></li><li><a href="/services/accounting-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3.75h11.5L20 8.25V20.25H4z"/><path d="M15.5 3.75v4.5H20"/><path d="M8 17v-3M12 17v-5.5M16 17v-2"/></svg>Accounting Assistance</a></li><li><a href="/services/legal-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5v17"/><path d="M7.5 20.5h9"/><path d="M4.5 7.5h15"/><path d="M12 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="m4.5 7.5-2.75 6.25a3 3 0 0 0 5.5 0z"/><path d="m19.5 7.5-2.75 6.25a3 3 0 0 0 5.5 0z"/></svg>Legal Assistance</a></li></ul></li><li style="--i:3"><a class="mobile-menu__link" href="/contact/"><span class="mobile-menu__num">04</span>Contact</a></li>
+          <li style="--i:0"><a class="mobile-menu__link" href="/"><span class="mobile-menu__num">01</span><span class="mobile-menu__label">Home</span></a></li><li style="--i:1"><a class="mobile-menu__link" href="/about/" aria-current="page"><span class="mobile-menu__num">02</span><span class="mobile-menu__label">About</span></a></li><li style="--i:2"><a class="mobile-menu__link" href="/services/"><span class="mobile-menu__num">03</span><span class="mobile-menu__label">Services</span></a><ul class="mobile-menu__sub"><li><a href="/services/web-development/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.75" y="4" width="18.5" height="16" rx="2.5"/><path d="M2.75 8.5h18.5"/><path d="m9.5 12.5-2.25 2.25L9.5 17"/><path d="m14.5 12.5 2.25 2.25L14.5 17"/><circle cx="5.75" cy="6.25" r=".4" fill="currentColor"/><circle cx="7.75" cy="6.25" r=".4" fill="currentColor"/></svg>Web Development</a></li><li><a href="/services/recruitment-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7.5" r="3.25"/><path d="M3.25 20c.6-3.4 2.9-5.5 5.75-5.5 1.3 0 2.5.4 3.4 1.2"/><path d="M15 13.5v3.25a2.75 2.75 0 0 0 5.5 0V13.5"/><path d="M15 13.5h1.75M18.75 13.5h1.75"/><path d="M15 11.25v-1M20.5 11.25v-1"/></svg>Recruitment Assistance</a></li><li><a href="/services/virtual-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 2.75v3.5M16 2.75v3.5"/><path d="m9 15 2 2 4-4"/></svg>Virtual Assistance</a></li><li><a href="/services/accounting-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3.75h11.5L20 8.25V20.25H4z"/><path d="M15.5 3.75v4.5H20"/><path d="M8 17v-3M12 17v-5.5M16 17v-2"/></svg>Accounting Assistance</a></li><li><a href="/services/legal-assistance/"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5v17"/><path d="M7.5 20.5h9"/><path d="M4.5 7.5h15"/><path d="M12 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="m4.5 7.5-2.75 6.25a3 3 0 0 0 5.5 0z"/><path d="m19.5 7.5-2.75 6.25a3 3 0 0 0 5.5 0z"/></svg>Legal Assistance</a></li></ul></li><li style="--i:3"><a class="mobile-menu__link" href="/contact/"><span class="mobile-menu__num">04</span><span class="mobile-menu__label">Contact</span></a></li>
         </ul>
       </nav>
       <div class="mobile-menu__footer">
@@ -114,30 +127,42 @@
   </header>
 <main id="main" tabindex="-1">
 
-<section class="page-hero " aria-labelledby="page-title">
-    <div class="page-hero__bg" aria-hidden="true">
-      <div class="page-hero__glow"></div>
-      <svg class="time-rings" viewBox="0 0 600 600"><circle cx="300" cy="300" r="290" class="ring"/><circle cx="300" cy="300" r="220" class="ring ring--dashed"/><circle cx="300" cy="300" r="150" class="ring"/><circle cx="300" cy="300" r="80" class="ring ring--faint"/><path d="M300.00 14.00L300.00 30.00" class="tick tick--major"/><path d="M329.90 15.57L329.06 23.52" class="tick"/><path d="M359.46 20.25L357.80 28.07" class="tick"/><path d="M388.38 28.00L385.91 35.61" class="tick"/><path d="M416.33 38.73L413.07 46.03" class="tick"/><path d="M443.00 52.32L435.00 66.17" class="tick tick--major"/><path d="M468.11 68.62L463.40 75.09" class="tick"/><path d="M491.37 87.46L486.02 93.41" class="tick"/><path d="M512.54 108.63L506.59 113.98" class="tick"/><path d="M531.38 131.89L524.91 136.60" class="tick"/><path d="M547.68 157.00L533.83 165.00" class="tick tick--major"/><path d="M561.27 183.67L553.97 186.93" class="tick"/><path d="M572.00 211.62L564.39 214.09" class="tick"/><path d="M579.75 240.54L571.93 242.20" class="tick"/><path d="M584.43 270.10L576.48 270.94" class="tick"/><path d="M586.00 300.00L570.00 300.00" class="tick tick--major"/><path d="M584.43 329.90L576.48 329.06" class="tick"/><path d="M579.75 359.46L571.93 357.80" class="tick"/><path d="M572.00 388.38L564.39 385.91" class="tick"/><path d="M561.27 416.33L553.97 413.07" class="tick"/><path d="M547.68 443.00L533.83 435.00" class="tick tick--major"/><path d="M531.38 468.11L524.91 463.40" class="tick"/><path d="M512.54 491.37L506.59 486.02" class="tick"/><path d="M491.37 512.54L486.02 506.59" class="tick"/><path d="M468.11 531.38L463.40 524.91" class="tick"/><path d="M443.00 547.68L435.00 533.83" class="tick tick--major"/><path d="M416.33 561.27L413.07 553.97" class="tick"/><path d="M388.38 572.00L385.91 564.39" class="tick"/><path d="M359.46 579.75L357.80 571.93" class="tick"/><path d="M329.90 584.43L329.06 576.48" class="tick"/><path d="M300.00 586.00L300.00 570.00" class="tick tick--major"/><path d="M270.10 584.43L270.94 576.48" class="tick"/><path d="M240.54 579.75L242.20 571.93" class="tick"/><path d="M211.62 572.00L214.09 564.39" class="tick"/><path d="M183.67 561.27L186.93 553.97" class="tick"/><path d="M157.00 547.68L165.00 533.83" class="tick tick--major"/><path d="M131.89 531.38L136.60 524.91" class="tick"/><path d="M108.63 512.54L113.98 506.59" class="tick"/><path d="M87.46 491.37L93.41 486.02" class="tick"/><path d="M68.62 468.11L75.09 463.40" class="tick"/><path d="M52.32 443.00L66.17 435.00" class="tick tick--major"/><path d="M38.73 416.33L46.03 413.07" class="tick"/><path d="M28.00 388.38L35.61 385.91" class="tick"/><path d="M20.25 359.46L28.07 357.80" class="tick"/><path d="M15.57 329.90L23.52 329.06" class="tick"/><path d="M14.00 300.00L30.00 300.00" class="tick tick--major"/><path d="M15.57 270.10L23.52 270.94" class="tick"/><path d="M20.25 240.54L28.07 242.20" class="tick"/><path d="M28.00 211.62L35.61 214.09" class="tick"/><path d="M38.73 183.67L46.03 186.93" class="tick"/><path d="M52.32 157.00L66.17 165.00" class="tick tick--major"/><path d="M68.62 131.89L75.09 136.60" class="tick"/><path d="M87.46 108.63L93.41 113.98" class="tick"/><path d="M108.63 87.46L113.98 93.41" class="tick"/><path d="M131.89 68.62L136.60 75.09" class="tick"/><path d="M157.00 52.32L165.00 66.17" class="tick tick--major"/><path d="M183.67 38.73L186.93 46.03" class="tick"/><path d="M211.62 28.00L214.09 35.61" class="tick"/><path d="M240.54 20.25L242.20 28.07" class="tick"/><path d="M270.10 15.57L270.94 23.52" class="tick"/><g class="ring-hand"><path d="M300 300 L300 40" class="hand"/><circle cx="300" cy="40" r="5" class="hand-dot"/></g></svg>
-    </div>
-    <div class="container page-hero__inner">
-      <div class="page-hero__content">
+<section class="hero hero--about " data-hero="about" aria-labelledby="page-title">
+    <div class="container hero__inner">
+      <div class="hero__content">
         <nav class="breadcrumbs" aria-label="Breadcrumb"><ol class="breadcrumbs__list"><li class="breadcrumbs__item"><a href="/">Home</a></li><li class="breadcrumbs__item"><span aria-current="page">About</span></li></ol></nav>
-        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>About Akrostech</p>
-        <h1 class="page-hero__title display" id="page-title" data-split>Built to <em class="accent">power</em> your growth.</h1>
-        <p class="page-hero__sub" data-reveal>We exist so ambitious companies can scale operations without scaling overhead — with dedicated teams that feel in-house, work your hours and answer to your goals.</p>
-        <div class="page-hero__actions" data-reveal><a class="btn btn--secondary" href="#team" data-magnetic><span class="btn__label">Meet the team</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4.5v15"/><path d="m6 13.5 6 6 6-6"/></svg></span></a></div>
+        <p class="tag"><span class="eyebrow__dot" aria-hidden="true"></span>About Akrostech</p>
+        <h1 class="hero__title display" id="page-title" data-split>Built to <span class="hl">power</span> your growth.</h1>
+        <p class="hero__sub" data-reveal>We exist so ambitious companies can scale operations without scaling overhead — with dedicated teams that feel in-house, work your hours and answer to your goals.</p>
+        <div class="hero__actions" data-reveal><a class="btn btn--secondary" href="#team" data-magnetic><span class="btn__label">Meet the team</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4.5v15"/><path d="m6 13.5 6 6 6-6"/></svg></span></a><a class="btn btn--primary" href="/contact/" data-magnetic><span class="btn__label">Book a Call</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg></span></a></div>
       </div>
-      
+      <div class="hero__visual"><div class="dial" data-dial>
+    <svg class="dial__face" viewBox="0 0 400 400" aria-hidden="true">
+      <defs><linearGradient id="dial-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFFF04"/><stop offset="1" stop-color="#B57EDC"/></linearGradient></defs>
+      <circle cx="200" cy="200" r="196" class="dial__bezel"/>
+      <path d="M303.9 260.0 A120 120 0 0 1 84.1 168.9" class="dial__hours"/>
+      <path d="M200.0 12.0L200.0 30.0" class="dial__tick dial__tick--major"/><path d="M212.3 12.4L211.8 20.4" class="dial__tick"/><path d="M224.5 13.6L223.5 21.5" class="dial__tick"/><path d="M236.7 15.6L235.1 23.5" class="dial__tick"/><path d="M248.7 18.4L244.0 35.8" class="dial__tick dial__tick--major"/><path d="M260.4 22.0L257.9 29.6" class="dial__tick"/><path d="M271.9 26.3L268.9 33.7" class="dial__tick"/><path d="M283.2 31.4L279.6 38.6" class="dial__tick"/><path d="M294.0 37.2L285.0 52.8" class="dial__tick dial__tick--major"/><path d="M304.4 43.7L300.0 50.3" class="dial__tick"/><path d="M314.4 50.8L309.6 57.2" class="dial__tick"/><path d="M324.0 58.7L318.7 64.7" class="dial__tick"/><path d="M332.9 67.1L320.2 79.8" class="dial__tick dial__tick--major"/><path d="M341.3 76.0L335.3 81.3" class="dial__tick"/><path d="M349.2 85.6L342.8 90.4" class="dial__tick"/><path d="M356.3 95.6L349.7 100.0" class="dial__tick"/><path d="M362.8 106.0L347.2 115.0" class="dial__tick dial__tick--major"/><path d="M368.6 116.8L361.4 120.4" class="dial__tick"/><path d="M373.7 128.1L366.3 131.1" class="dial__tick"/><path d="M378.0 139.6L370.4 142.1" class="dial__tick"/><path d="M381.6 151.3L364.2 156.0" class="dial__tick dial__tick--major"/><path d="M384.4 163.3L376.5 164.9" class="dial__tick"/><path d="M386.4 175.5L378.5 176.5" class="dial__tick"/><path d="M387.6 187.7L379.6 188.2" class="dial__tick"/><path d="M388.0 200.0L370.0 200.0" class="dial__tick dial__tick--major"/><path d="M387.6 212.3L379.6 211.8" class="dial__tick"/><path d="M386.4 224.5L378.5 223.5" class="dial__tick"/><path d="M384.4 236.7L376.5 235.1" class="dial__tick"/><path d="M381.6 248.7L364.2 244.0" class="dial__tick dial__tick--major"/><path d="M378.0 260.4L370.4 257.9" class="dial__tick"/><path d="M373.7 271.9L366.3 268.9" class="dial__tick"/><path d="M368.6 283.2L361.4 279.6" class="dial__tick"/><path d="M362.8 294.0L347.2 285.0" class="dial__tick dial__tick--major"/><path d="M356.3 304.4L349.7 300.0" class="dial__tick"/><path d="M349.2 314.4L342.8 309.6" class="dial__tick"/><path d="M341.3 324.0L335.3 318.7" class="dial__tick"/><path d="M332.9 332.9L320.2 320.2" class="dial__tick dial__tick--major"/><path d="M324.0 341.3L318.7 335.3" class="dial__tick"/><path d="M314.4 349.2L309.6 342.8" class="dial__tick"/><path d="M304.4 356.3L300.0 349.7" class="dial__tick"/><path d="M294.0 362.8L285.0 347.2" class="dial__tick dial__tick--major"/><path d="M283.2 368.6L279.6 361.4" class="dial__tick"/><path d="M271.9 373.7L268.9 366.3" class="dial__tick"/><path d="M260.4 378.0L257.9 370.4" class="dial__tick"/><path d="M248.7 381.6L244.0 364.2" class="dial__tick dial__tick--major"/><path d="M236.7 384.4L235.1 376.5" class="dial__tick"/><path d="M224.5 386.4L223.5 378.5" class="dial__tick"/><path d="M212.3 387.6L211.8 379.6" class="dial__tick"/><path d="M200.0 388.0L200.0 370.0" class="dial__tick dial__tick--major"/><path d="M187.7 387.6L188.2 379.6" class="dial__tick"/><path d="M175.5 386.4L176.5 378.5" class="dial__tick"/><path d="M163.3 384.4L164.9 376.5" class="dial__tick"/><path d="M151.3 381.6L156.0 364.2" class="dial__tick dial__tick--major"/><path d="M139.6 378.0L142.1 370.4" class="dial__tick"/><path d="M128.1 373.7L131.1 366.3" class="dial__tick"/><path d="M116.8 368.6L120.4 361.4" class="dial__tick"/><path d="M106.0 362.8L115.0 347.2" class="dial__tick dial__tick--major"/><path d="M95.6 356.3L100.0 349.7" class="dial__tick"/><path d="M85.6 349.2L90.4 342.8" class="dial__tick"/><path d="M76.0 341.3L81.3 335.3" class="dial__tick"/><path d="M67.1 332.9L79.8 320.2" class="dial__tick dial__tick--major"/><path d="M58.7 324.0L64.7 318.7" class="dial__tick"/><path d="M50.8 314.4L57.2 309.6" class="dial__tick"/><path d="M43.7 304.4L50.3 300.0" class="dial__tick"/><path d="M37.2 294.0L52.8 285.0" class="dial__tick dial__tick--major"/><path d="M31.4 283.2L38.6 279.6" class="dial__tick"/><path d="M26.3 271.9L33.7 268.9" class="dial__tick"/><path d="M22.0 260.4L29.6 257.9" class="dial__tick"/><path d="M18.4 248.7L35.8 244.0" class="dial__tick dial__tick--major"/><path d="M15.6 236.7L23.5 235.1" class="dial__tick"/><path d="M13.6 224.5L21.5 223.5" class="dial__tick"/><path d="M12.4 212.3L20.4 211.8" class="dial__tick"/><path d="M12.0 200.0L30.0 200.0" class="dial__tick dial__tick--major"/><path d="M12.4 187.7L20.4 188.2" class="dial__tick"/><path d="M13.6 175.5L21.5 176.5" class="dial__tick"/><path d="M15.6 163.3L23.5 164.9" class="dial__tick"/><path d="M18.4 151.3L35.8 156.0" class="dial__tick dial__tick--major"/><path d="M22.0 139.6L29.6 142.1" class="dial__tick"/><path d="M26.3 128.1L33.7 131.1" class="dial__tick"/><path d="M31.4 116.8L38.6 120.4" class="dial__tick"/><path d="M37.2 106.0L52.8 115.0" class="dial__tick dial__tick--major"/><path d="M43.7 95.6L50.3 100.0" class="dial__tick"/><path d="M50.8 85.6L57.2 90.4" class="dial__tick"/><path d="M58.7 76.0L64.7 81.3" class="dial__tick"/><path d="M67.1 67.1L79.8 79.8" class="dial__tick dial__tick--major"/><path d="M76.0 58.7L81.3 64.7" class="dial__tick"/><path d="M85.6 50.8L90.4 57.2" class="dial__tick"/><path d="M95.6 43.7L100.0 50.3" class="dial__tick"/><path d="M106.0 37.2L115.0 52.8" class="dial__tick dial__tick--major"/><path d="M116.8 31.4L120.4 38.6" class="dial__tick"/><path d="M128.1 26.3L131.1 33.7" class="dial__tick"/><path d="M139.6 22.0L142.1 29.6" class="dial__tick"/><path d="M151.3 18.4L156.0 35.8" class="dial__tick dial__tick--major"/><path d="M163.3 15.6L164.9 23.5" class="dial__tick"/><path d="M175.5 13.6L176.5 21.5" class="dial__tick"/><path d="M187.7 12.4L188.2 20.4" class="dial__tick"/><text x="200.0" y="57.0" class="dial__num">00</text><text x="304.7" y="100.3" class="dial__num">03</text><text x="348.0" y="205.0" class="dial__num">06</text><text x="304.7" y="309.7" class="dial__num">09</text><text x="200.0" y="353.0" class="dial__num">12</text><text x="95.3" y="309.7" class="dial__num">15</text><text x="52.0" y="205.0" class="dial__num">18</text><text x="95.3" y="100.3" class="dial__num">21</text>
+      <g class="dial__hand" data-dial-hand><path d="M200 200 L200 52"/><circle cx="200" cy="52" r="13" class="dial__knob"/></g>
+      <circle cx="200" cy="200" r="6" class="dial__pin"/>
+    </svg>
+    <div class="dial__readout">
+      <span class="dial__label">Your time</span>
+      <span class="dial__time" data-dial-time>09:00</span>
+      <span class="dial__status" data-dial-status>Team online · on your calls</span>
     </div>
-    <div class="signal page-hero__signal" aria-hidden="true" data-reveal="signal"><span class="signal__line"></span><span class="signal__pulse"></span></div>
+    <div class="dial__slider" role="slider" tabindex="0" aria-label="Pick an hour of your working day" aria-valuemin="0" aria-valuemax="1425" aria-valuenow="540" aria-valuetext="09:00, team online" data-dial-slider></div>
+    <p class="dial__hint"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.75"/><path d="M12 7.25V12l3.25 2"/></svg>Drag the hand to any hour of your day</p>
+  </div></div>
+    </div>
+    
   </section>
 
 <section class="section story" aria-labelledby="story-title">
   <div class="container story__layout">
     <div class="story__sticky">
       <header class="section-head section-head--start" data-reveal>
-    <p class="eyebrow">Our story</p>
-    <h2 class="section-head__title" id="story-title">Why we chose <em class="accent">your</em> clock.</h2>
+    <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Our story</p>
+    <h2 class="section-head__title" id="story-title">Why we chose <span class="hl">your</span> clock.</h2>
     
   </header>
       <p class="story__entity" data-reveal>Akrostech is a backend operations partner that provides web development, recruitment assistance, virtual assistance, accounting assistance and legal assistance to growing companies in the USA, Europe, Australia and the Middle East. Its dedicated teams work during each client’s local business hours.</p>
@@ -176,8 +201,8 @@
 <section class="section section--light values" aria-labelledby="values-title">
   <div class="container">
     <header class="section-head section-head--start" data-reveal>
-    <p class="eyebrow">What we stand for</p>
-    <h2 class="section-head__title" id="values-title">Five values. <em class="accent">Zero</em> fine print.</h2>
+    <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>What we stand for</p>
+    <h2 class="section-head__title" id="values-title">Five values. <span class="hl">Zero</span> fine print.</h2>
     <p class="section-head__lead">These aren’t posters on a wall. They decide how we price, how we hire and what happens when something goes wrong.</p>
   </header>
     <div class="values__grid" data-stagger><div class="feature" data-reveal>
@@ -207,8 +232,8 @@
 <section class="section team" id="team" aria-labelledby="team-title">
   <div class="container">
     <header class="section-head section-head--start" data-reveal>
-    <p class="eyebrow">Leadership</p>
-    <h2 class="section-head__title" id="team-title">The people behind the <em class="accent">operations.</em></h2>
+    <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Leadership</p>
+    <h2 class="section-head__title" id="team-title">The people behind the <span class="hl">operations.</span></h2>
     <p class="section-head__lead">Operators, engineers and specialists who have run the same functions they now run for you.</p>
   </header>
     <ul class="team__grid" data-stagger>
@@ -269,8 +294,8 @@
   <div class="container trust-band__layout">
     <div>
       <header class="section-head section-head--start" data-reveal>
-    <p class="eyebrow">Security &amp; trust</p>
-    <h2 class="section-head__title" id="trust-title">Confidential by <em class="accent">default.</em></h2>
+    <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Security &amp; trust</p>
+    <h2 class="section-head__title" id="trust-title">Confidential by <span class="hl">default.</span></h2>
     
   </header>
     </div>
@@ -285,14 +310,13 @@
 
 <section class="cta-banner" aria-labelledby="cta-title">
     <div class="container">
-      <div class="cta-banner__panel" data-reveal="scale">
-        <div class="cta-banner__grain" aria-hidden="true"></div>
-        <svg class="cta-banner__rings time-rings" viewBox="0 0 600 600" aria-hidden="true"><circle cx="300" cy="300" r="290" class="ring"/><circle cx="300" cy="300" r="220" class="ring ring--dashed"/><circle cx="300" cy="300" r="150" class="ring"/><circle cx="300" cy="300" r="80" class="ring ring--faint"/><path d="M300.00 14.00L300.00 30.00" class="tick tick--major"/><path d="M329.90 15.57L329.06 23.52" class="tick"/><path d="M359.46 20.25L357.80 28.07" class="tick"/><path d="M388.38 28.00L385.91 35.61" class="tick"/><path d="M416.33 38.73L413.07 46.03" class="tick"/><path d="M443.00 52.32L435.00 66.17" class="tick tick--major"/><path d="M468.11 68.62L463.40 75.09" class="tick"/><path d="M491.37 87.46L486.02 93.41" class="tick"/><path d="M512.54 108.63L506.59 113.98" class="tick"/><path d="M531.38 131.89L524.91 136.60" class="tick"/><path d="M547.68 157.00L533.83 165.00" class="tick tick--major"/><path d="M561.27 183.67L553.97 186.93" class="tick"/><path d="M572.00 211.62L564.39 214.09" class="tick"/><path d="M579.75 240.54L571.93 242.20" class="tick"/><path d="M584.43 270.10L576.48 270.94" class="tick"/><path d="M586.00 300.00L570.00 300.00" class="tick tick--major"/><path d="M584.43 329.90L576.48 329.06" class="tick"/><path d="M579.75 359.46L571.93 357.80" class="tick"/><path d="M572.00 388.38L564.39 385.91" class="tick"/><path d="M561.27 416.33L553.97 413.07" class="tick"/><path d="M547.68 443.00L533.83 435.00" class="tick tick--major"/><path d="M531.38 468.11L524.91 463.40" class="tick"/><path d="M512.54 491.37L506.59 486.02" class="tick"/><path d="M491.37 512.54L486.02 506.59" class="tick"/><path d="M468.11 531.38L463.40 524.91" class="tick"/><path d="M443.00 547.68L435.00 533.83" class="tick tick--major"/><path d="M416.33 561.27L413.07 553.97" class="tick"/><path d="M388.38 572.00L385.91 564.39" class="tick"/><path d="M359.46 579.75L357.80 571.93" class="tick"/><path d="M329.90 584.43L329.06 576.48" class="tick"/><path d="M300.00 586.00L300.00 570.00" class="tick tick--major"/><path d="M270.10 584.43L270.94 576.48" class="tick"/><path d="M240.54 579.75L242.20 571.93" class="tick"/><path d="M211.62 572.00L214.09 564.39" class="tick"/><path d="M183.67 561.27L186.93 553.97" class="tick"/><path d="M157.00 547.68L165.00 533.83" class="tick tick--major"/><path d="M131.89 531.38L136.60 524.91" class="tick"/><path d="M108.63 512.54L113.98 506.59" class="tick"/><path d="M87.46 491.37L93.41 486.02" class="tick"/><path d="M68.62 468.11L75.09 463.40" class="tick"/><path d="M52.32 443.00L66.17 435.00" class="tick tick--major"/><path d="M38.73 416.33L46.03 413.07" class="tick"/><path d="M28.00 388.38L35.61 385.91" class="tick"/><path d="M20.25 359.46L28.07 357.80" class="tick"/><path d="M15.57 329.90L23.52 329.06" class="tick"/><path d="M14.00 300.00L30.00 300.00" class="tick tick--major"/><path d="M15.57 270.10L23.52 270.94" class="tick"/><path d="M20.25 240.54L28.07 242.20" class="tick"/><path d="M28.00 211.62L35.61 214.09" class="tick"/><path d="M38.73 183.67L46.03 186.93" class="tick"/><path d="M52.32 157.00L66.17 165.00" class="tick tick--major"/><path d="M68.62 131.89L75.09 136.60" class="tick"/><path d="M87.46 108.63L93.41 113.98" class="tick"/><path d="M108.63 87.46L113.98 93.41" class="tick"/><path d="M131.89 68.62L136.60 75.09" class="tick"/><path d="M157.00 52.32L165.00 66.17" class="tick tick--major"/><path d="M183.67 38.73L186.93 46.03" class="tick"/><path d="M211.62 28.00L214.09 35.61" class="tick"/><path d="M240.54 20.25L242.20 28.07" class="tick"/><path d="M270.10 15.57L270.94 23.52" class="tick"/><g class="ring-hand"><path d="M300 300 L300 40" class="hand"/><circle cx="300" cy="40" r="5" class="hand-dot"/></g></svg>
+      <div class="cta-banner__panel" data-reveal="scale" data-spotlight>
+        <div class="cta-banner__currents" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="cta-banner__content">
-          <p class="eyebrow eyebrow--ink"><span class="eyebrow__dot" aria-hidden="true"></span>Your next step</p>
-          <h2 class="cta-banner__title" id="cta-title">Meet the team that’ll meet <em class="accent">you</em> at 9.</h2>
+          <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Your next step</p>
+          <h2 class="cta-banner__title" id="cta-title">Meet the team that’ll meet <span class="hl">you</span> at 9.</h2>
           <p class="cta-banner__body">Tell us what’s slowing your team down. In 30 minutes — in your time zone — we’ll map exactly how a dedicated Akrostech team would take it off your plate.</p>
-          <div class="cta-banner__actions"><a class="btn btn--inverse btn--lg" href="/contact/" data-magnetic><span class="btn__label">Book a Free Consultation</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg></span></a></div>
+          <div class="cta-banner__actions"><a class="btn btn--primary btn--lg" href="/contact/" data-magnetic><span class="btn__label">Book a Free Consultation</span><span class="btn__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg></span></a></div>
           <ul class="cta-banner__micro" aria-label="What to expect">
             <li><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.75 4.75L19.5 7"/></svg>No commitment</li>
             <li><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.75 4.75L19.5 7"/></svg>NDA available before the call</li>
@@ -303,45 +327,61 @@
     </div>
   </section>
 </main>
-<footer class="site-footer">
-    <div class="site-footer__glow" aria-hidden="true"></div>
+<footer class="site-footer" data-footer>
+    <div class="site-footer__spot" data-footer-spot aria-hidden="true"></div>
+    <a class="footer-marquee" href="/contact/" data-footer-marquee aria-label="Book a free consultation">
+      <ul class="footer-marquee__track" data-footer-marquee-track><li class="footer-marquee__item">Let’s talk<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline">Book a free consultation<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item">Your hours. Our horizon.<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline">Scale without the overhead<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item">Let’s talk<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline">Book a free consultation<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item">Your hours. Our horizon.<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline">Scale without the overhead<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item" aria-hidden="true">Let’s talk<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline" aria-hidden="true">Book a free consultation<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item" aria-hidden="true">Your hours. Our horizon.<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline" aria-hidden="true">Scale without the overhead<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item" aria-hidden="true">Let’s talk<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline" aria-hidden="true">Book a free consultation<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item" aria-hidden="true">Your hours. Our horizon.<span class="footer-marquee__star" aria-hidden="true">✦</span></li><li class="footer-marquee__item footer-marquee__item--outline" aria-hidden="true">Scale without the overhead<span class="footer-marquee__star" aria-hidden="true">✦</span></li></ul>
+    </a>
     <div class="container">
-      <div class="site-footer__top">
+      <div class="site-footer__grid">
         <div class="site-footer__brand">
-          <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="2"/>
-    <path d="M16 3a13 13 0 0 1 12.36 8.98" fill="none" stroke="var(--color-lime)" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M11.75 17.5h8.5" stroke="var(--color-lavender)" stroke-width="2.25" stroke-linecap="round"/>
+          <a class="logo" href="/" aria-label="Akrostech — home"><svg class="logo__mark" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="logo-f-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFFF04"/><stop offset="1" stop-color="#B57EDC"/></linearGradient></defs>
+    <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="2.5"/>
+    <path d="M16 3a13 13 0 0 1 11.3 19.4" fill="none" stroke="url(#logo-f-g)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M9.5 22.5 16 8.5l6.5 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11.75 17.5h8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
   </svg><span class="logo__word">Akrostech</span></a>
-          <p class="site-footer__tagline">Your hours. Our horizon.</p>
+          <p class="site-footer__tagline">Your hours. <span class="hl">Our horizon.</span></p>
           <p class="site-footer__entity">Akrostech is a backend operations partner that provides web development, recruitment assistance, virtual assistance, accounting assistance and legal assistance to growing companies in the USA, Europe, Australia and the Middle East. Its dedicated teams work during each client’s local business hours.</p>
+          <button class="copy-email" type="button" data-copy="hello@akrostech.com">
+            <span class="copy-email__icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.75" y="5" width="18.5" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6.25 8.5-6.25"/></svg></span>
+            <span class="copy-email__text">hello@akrostech.com</span>
+            <span class="copy-email__hint" data-copy-hint>Copy</span>
+          </button>
           <ul class="social" aria-label="Social media">
             <li><a class="social__link" href="https://www.linkedin.com/company/akrostech" rel="noopener" target="_blank"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.75 10.5v6"/><path d="M7.75 7.5h.01"/><path d="M11.5 16.5v-6"/><path d="M11.5 13a2.5 2.5 0 0 1 5 0v3.5"/></svg><span class="visually-hidden">LinkedIn (opens in a new tab)</span></a></li><li><a class="social__link" href="https://x.com/akrostech" rel="noopener" target="_blank"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 4 6.6 8.8L4.2 20h1.6l5.6-6.2L16 20h4l-6.9-9.3L19.2 4h-1.6l-5.3 5.9L8 4z"/></svg><span class="visually-hidden">X (Twitter) (opens in a new tab)</span></a></li><li><a class="social__link" href="https://www.instagram.com/akrostech" rel="noopener" target="_blank"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.25 6.75h.01"/></svg><span class="visually-hidden">Instagram (opens in a new tab)</span></a></li>
           </ul>
         </div>
         <nav class="site-footer__col" aria-labelledby="footer-company"><h2 class="site-footer__heading" id="footer-company">Company</h2>
-          <ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li><li><a href="/contact/">Contact</a></li></ul>
+          <ul><li><a class="footer-link" href="/">Home</a></li><li><a class="footer-link" href="/about/">About</a></li><li><a class="footer-link" href="/services/">Services</a></li><li><a class="footer-link" href="/contact/">Contact</a></li><li><a class="footer-link" href="/privacy/">Privacy Policy</a></li><li><a class="footer-link" href="/terms/">Terms of Service</a></li></ul>
         </nav>
         <nav class="site-footer__col" aria-labelledby="footer-services"><h2 class="site-footer__heading" id="footer-services">Services</h2>
-          <ul><li><a href="/services/web-development/">Web Development</a></li><li><a href="/services/recruitment-assistance/">Recruitment Assistance</a></li><li><a href="/services/virtual-assistance/">Virtual Assistance</a></li><li><a href="/services/accounting-assistance/">Accounting Assistance</a></li><li><a href="/services/legal-assistance/">Legal Assistance</a></li></ul>
+          <ul><li><a class="footer-link" href="/services/web-development/">Web Development</a></li><li><a class="footer-link" href="/services/recruitment-assistance/">Recruitment Assistance</a></li><li><a class="footer-link" href="/services/virtual-assistance/">Virtual Assistance</a></li><li><a class="footer-link" href="/services/accounting-assistance/">Accounting Assistance</a></li><li><a class="footer-link" href="/services/legal-assistance/">Legal Assistance</a></li></ul>
         </nav>
-        <div class="site-footer__col"><h2 class="site-footer__heading">Contact</h2>
-          <ul class="site-footer__contact">
-            <li><a href="mailto:hello@akrostech.com"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.75" y="5" width="18.5" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6.25 8.5-6.25"/></svg>hello@akrostech.com</a></li>
-            <li><a href="tel:+15550000000"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5.25 3.25h3.5l1.75 4.5-2.25 1.5a11 11 0 0 0 6.5 6.5l1.5-2.25 4.5 1.75v3.5a2 2 0 0 1-2 2C10.6 20.25 3.75 13.4 3.25 5.25a2 2 0 0 1 2-2z"/></svg>+1 (555) 000-0000</a></li>
-            <li><span><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.75"/><path d="M12 7.25V12l3.25 2"/></svg>Monday – Friday, 9 AM – 6 PM EST</span></li>
+        <div class="site-footer__col">
+          <h2 class="site-footer__heading">Live desks</h2>
+          <ul class="footer-desks">
+            <li class="footer-desk"><span class="footer-desk__city">New York</span><time class="footer-desk__time" data-tz="America/New_York">--:--</time></li><li class="footer-desk"><span class="footer-desk__city">London</span><time class="footer-desk__time" data-tz="Europe/London">--:--</time></li><li class="footer-desk"><span class="footer-desk__city">Dubai</span><time class="footer-desk__time" data-tz="Asia/Dubai">--:--</time></li><li class="footer-desk"><span class="footer-desk__city">Sydney</span><time class="footer-desk__time" data-tz="Australia/Sydney">--:--</time></li>
           </ul>
-          <p class="site-footer__regions"><span class="eyebrow">Regions served</span><span class="chip">USA</span><span class="chip">Europe</span><span class="chip">Middle East</span><span class="chip">Australia</span></p>
+          <p class="site-footer__contact"><a class="footer-link" href="tel:+15550000000"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5.25 3.25h3.5l1.75 4.5-2.25 1.5a11 11 0 0 0 6.5 6.5l1.5-2.25 4.5 1.75v3.5a2 2 0 0 1-2 2C10.6 20.25 3.75 13.4 3.25 5.25a2 2 0 0 1 2-2z"/></svg>+1 (555) 000-0000</a></p>
+          <p class="site-footer__hours"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.75"/><path d="M12 7.25V12l3.25 2"/></svg>Monday – Friday, 9 AM – 6 PM EST</p>
         </div>
       </div>
-      <div class="site-footer__wordmark" aria-hidden="true">Akrostech</div>
+    </div>
+    <p class="footer-wordmark" data-wordmark aria-hidden="true"><span class="footer-wordmark__char" style="--c:0">A</span><span class="footer-wordmark__char" style="--c:1">k</span><span class="footer-wordmark__char" style="--c:2">r</span><span class="footer-wordmark__char" style="--c:3">o</span><span class="footer-wordmark__char" style="--c:4">s</span><span class="footer-wordmark__char" style="--c:5">t</span><span class="footer-wordmark__char" style="--c:6">e</span><span class="footer-wordmark__char" style="--c:7">c</span><span class="footer-wordmark__char" style="--c:8">h</span></p>
+    <div class="container">
       <div class="site-footer__bottom">
         <p>© 2026 Akrostech. All rights reserved.</p>
         <ul class="site-footer__legal"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul>
+        <button class="to-top" type="button" data-to-top>
+          <svg class="to-top__ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" class="to-top__track"/><circle cx="24" cy="24" r="21" class="to-top__progress" data-to-top-progress/></svg>
+          <svg class="icon to-top__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg><span class="visually-hidden">Back to top</span>
+        </button>
       </div>
     </div>
   </footer>
+<div class="toast" role="status" data-toast></div>
 <div class="visually-hidden" aria-live="polite" data-announcer></div>
 <script type="module" src="/assets/js/main.js"></script>
 </body>

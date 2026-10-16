@@ -41,6 +41,7 @@ function tick() {
 
   const online = isBusinessHours(now);
   const local = formatTime(now, undefined);
+  for (const el of $$('[data-local-time]')) if (local) el.textContent = local;
   const badge = $('[data-live-clock]');
   const badgeText = $('[data-live-clock-text]');
   if (badge && badgeText && local) {
@@ -62,7 +63,7 @@ function tick() {
 }
 
 export function initClocks() {
-  if (!$('time[data-tz], [data-live-clock], [data-tz-line]')) return;
+  if (!$('time[data-tz], [data-live-clock], [data-tz-line], [data-local-time]')) return;
   tick();
   // Align updates to the start of each minute, then tick every 60s.
   const msToNextMinute = 60000 - (Date.now() % 60000);

@@ -1,6 +1,9 @@
 /* ==========================================================================
-   LAYOUT — container, 12/4-column grid, section rhythm, surfaces (§4.3)
+   LAYOUT — container, grid, section rhythm, content stacking over the flow
    ========================================================================== */
+
+/* Content sits above the flowing background layer (flow.css). */
+.site-header, main, .site-footer { position: relative; z-index: var(--z-content); }
 
 .container {
   width: 100%;
@@ -9,7 +12,6 @@
   padding-inline: max(var(--gutter), env(safe-area-inset-left));
 }
 
-/* 4-column mobile grid → 12-column desktop grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -19,44 +21,29 @@
   .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 }
 
-/* Section rhythm: 96px mobile → 160px desktop (generous space = luxury) */
 .section {
   position: relative;
   padding-block: var(--section-pad);
-  isolation: isolate;
 }
 .section--tight { padding-block: calc(var(--section-pad) * 0.6); }
 
-/* Light section — White role (§4.1, 25%). Ink text; Lime is never used for
-   text or icons here (§4.1 ❌ Lime on White). Accents shift to Plum Shadow. */
+/* Frosted panel section: a white glass sheet floating over the flow — gives
+   rhythm on an all-white page without changing the background colour. */
 .section--light {
-  --text-primary: var(--color-ink);
-  --text-secondary: var(--color-ink-72);
-  --text-accent: var(--color-plum);
-  --border-subtle: var(--color-ink-12);
-  --border-strong: rgb(11 11 18 / 0.24);
-  background: var(--color-white);
-  color: var(--color-ink);
-  color-scheme: light;
-  border-radius: var(--radius-panel);
   margin-inline: clamp(0.5rem, 1.5vw, 1.5rem);
-}
-.section--light .accent {
-  background: none;
-  color: var(--color-plum);
+  border-radius: var(--radius-panel);
+  background: var(--surface-glass-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
 }
 
-/* Section heading block */
 .section-head {
   display: grid;
   gap: var(--space-4);
-  max-width: 52rem;
+  max-width: 56rem;
   margin-bottom: clamp(var(--space-7), 6vw, var(--space-9));
 }
 .section-head--center { margin-inline: auto; text-align: center; justify-items: center; }
-.section-head__title { color: var(--text-primary); }
-.section-head__lead {
-  max-width: 44rem;
-  font-size: var(--text-body-lg);
-  color: var(--text-secondary);
-}
+.section-head__lead { max-width: 44rem; font-size: var(--text-body-lg); color: var(--text-secondary); }

@@ -3,6 +3,7 @@ import { esc, each } from '../lib/html.mjs';
 import { icon } from '../components/icons.mjs';
 import { button, sectionHead, pageHero, feature, ctaBanner, avatar, eyebrow } from '../components/ui.mjs';
 import { breadcrumbSchema } from '../components/layout.mjs';
+import { aboutDial } from '../components/hero-visuals.mjs';
 import { values, team, stats } from '../data/content.mjs';
 import { brand } from '../config.mjs';
 
@@ -35,11 +36,13 @@ export function render({ siteUrl }) {
   const crumbs = [{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }];
   const body = `
 ${pageHero({
+  variant: 'about',
   kicker: 'About Akrostech',
   title: 'Built to *power* your growth.',
   sub: 'We exist so ambitious companies can scale operations without scaling overhead — with dedicated teams that feel in-house, work your hours and answer to your goals.',
   crumbs,
-  actions: `${button({ label: 'Meet the team', href: '#team', variant: 'secondary', iconName: 'arrowDown' })}`,
+  actions: `${button({ label: 'Meet the team', href: '#team', variant: 'secondary', iconName: 'arrowDown' })}${button({ label: 'Book a Call', href: '/contact/', variant: 'primary' })}`,
+  visual: aboutDial(),
 })}
 
 <section class="section story" aria-labelledby="story-title">

@@ -4,6 +4,16 @@ import { icon } from '../components/icons.mjs';
 import { button, sectionHead, pageHero, faqList, ctaBanner, serviceCard } from '../components/ui.mjs';
 import { breadcrumbSchema, faqSchema } from '../components/layout.mjs';
 import { services } from '../data/services.mjs';
+import { webBrowser, recruitPipeline, vaTasks, ledgerChart, legalDoc } from '../components/hero-visuals.mjs';
+
+/** Each pillar gets its own interactive hero (heroes.js keys off `variant`). */
+const VISUALS = {
+  'web-development': { variant: 'code', render: webBrowser },
+  'recruitment-assistance': { variant: 'pipeline', render: recruitPipeline },
+  'virtual-assistance': { variant: 'tasks', render: vaTasks },
+  'accounting-assistance': { variant: 'ledger', render: ledgerChart },
+  'legal-assistance': { variant: 'redline', render: legalDoc },
+};
 
 export function render(s, { siteUrl }) {
   const path = `/services/${s.slug}/`;
@@ -12,16 +22,14 @@ export function render(s, { siteUrl }) {
 
   const body = `
 ${pageHero({
+  variant: VISUALS[s.slug].variant,
   kicker: s.hero.eyebrow,
   title: s.hero.title,
   sub: s.hero.sub,
   crumbs,
-  className: `page-hero--service page-hero--${s.accent}`,
+  className: `hero--service hero--${s.accent}`,
   actions: `${button({ label: 'Get Started', href: `/contact/?service=${s.slug}`, variant: 'primary' })}${button({ label: 'What’s included', href: '#included', variant: 'secondary', iconName: 'arrowDown' })}`,
-  aside: `<div class="service-hero-object service-hero-object--${s.accent}" aria-hidden="true" data-tilt>
-    <span class="service-hero-object__ring"></span><span class="service-hero-object__ring service-hero-object__ring--2"></span>
-    <span class="service-hero-object__core">${icon(s.icon, { size: 72 })}</span>
-  </div>`,
+  visual: VISUALS[s.slug].render(),
 })}
 
 <section class="section overview" aria-labelledby="overview-title">

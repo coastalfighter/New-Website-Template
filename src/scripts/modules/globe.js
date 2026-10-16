@@ -9,6 +9,7 @@ import { $, $$, whenIdle, prefersReducedMotion, clamp } from './utils.js';
 
 const LIME = [207 / 255, 1, 4 / 255];
 const LAVENDER = [181 / 255, 126 / 255, 220 / 255];
+const PLUM = [91 / 255, 58 / 255, 120 / 255];
 
 /** Convert [lat, lng] into the cobe rotation that faces that point. */
 export function locationToAngles([lat, lng]) {
@@ -48,24 +49,26 @@ export function initGlobe() {
         height: size,
         phi: state.phi,
         theta: state.theta,
-        dark: 1,
-        diffuse: 1.25,
+        // Light globe on the white canvas: pale sphere, ink dots, Lavender
+        // signal arcs, Lime + Plum markers.
+        dark: 0,
+        diffuse: 1.2,
         mapSamples: size < 420 ? 12000 : 20000,
-        mapBrightness: 5.5,
-        mapBaseBrightness: 0.02,
-        baseColor: [0.14, 0.13, 0.2],
+        mapBrightness: 7,
+        mapBaseBrightness: 0,
+        baseColor: [1, 1, 1],
         markerColor: LIME,
-        glowColor: LAVENDER,
+        glowColor: [0.96, 0.94, 1],
         markers: [
-          { location: data.hub, size: 0.09 },
-          ...data.targets.map((location) => ({ location, size: 0.05, color: LAVENDER })),
+          { location: data.hub, size: 0.1, color: PLUM },
+          ...data.targets.map((location) => ({ location, size: 0.06, color: LIME })),
         ],
         arcs: data.targets.map((to) => ({ from: data.hub, to })),
-        arcColor: LIME,
+        arcColor: LAVENDER,
         arcWidth: 0.9,
         arcHeight: 0.32,
         markerElevation: 0.02,
-        opacity: 0.92,
+        opacity: 1,
       });
       canvas.style.width = `${size}px`;
       canvas.style.height = `${size}px`;

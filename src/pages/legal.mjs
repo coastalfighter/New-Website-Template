@@ -8,13 +8,14 @@
 import { esc, each } from '../lib/html.mjs';
 import { pageHero, button } from '../components/ui.mjs';
 import { contact, brand } from '../config.mjs';
+import { privacyShield, termsStack, lostSignal } from '../components/hero-visuals.mjs';
 
 const UPDATED = 'To be confirmed before launch';
 
-function legalPage({ path, title, description, heading, intro, sections }) {
-  const crumbs = [{ label: 'Home', href: '/' }, { label: heading, href: path }];
+function legalPage({ path, title, description, heading, intro, sections, variant, visual }) {
+  const crumbs = [{ label: 'Home', href: '/' }, { label: heading.replace(/\*/g, ''), href: path }];
   const body = `
-${pageHero({ kicker: 'Legal', title: heading, sub: intro, crumbs, className: 'page-hero--compact' })}
+${pageHero({ variant, kicker: 'Legal', title: heading, sub: intro, crumbs, visual, className: 'hero--compact' })}
 <section class="section section--tight">
   <div class="container legal">
     <p class="notice notice--draft" role="note"><strong>Draft template.</strong> This page must be reviewed and completed by legal counsel before launch. Last updated: ${UPDATED}.</p>
@@ -33,7 +34,9 @@ export const privacy = () =>
     path: '/privacy/',
     title: 'Privacy Policy — Akrostech',
     description: `How ${brand.name} collects, uses and protects personal information shared through this website.`,
-    heading: 'Privacy Policy',
+    heading: 'Privacy *Policy*',
+    variant: 'shield',
+    visual: privacyShield(),
     intro: 'How we collect, use and protect the information you share with us.',
     sections: [
       { h: 'Information we collect', p: ['When you contact us we collect the details you provide: your name, business email, company, the service you are interested in, your budget range and your message. We also collect limited technical data, such as browser type and pages visited, to keep the site secure and working well.'] },
@@ -49,7 +52,9 @@ export const terms = () =>
     path: '/terms/',
     title: 'Terms of Service — Akrostech',
     description: `The terms that govern use of the ${brand.name} website.`,
-    heading: 'Terms of Service',
+    heading: 'Terms of *Service*',
+    variant: 'stack',
+    visual: termsStack(),
     intro: 'The ground rules for using this website.',
     sections: [
       { h: 'Using this website', p: ['This website provides general information about Akrostech and our services. You may use it for lawful purposes only and must not attempt to disrupt or gain unauthorised access to it.'] },
@@ -67,10 +72,12 @@ export const notFound = () => ({
   noindex: true,
   pageClass: 'page-404',
   body: `${pageHero({
+    variant: 'lost',
+    visual: lostSignal(),
     kicker: 'Error 404',
     title: 'Signal *lost.*',
     sub: 'The page you were looking for has moved or no longer exists. Let’s get you back on track.',
-    className: 'page-hero--compact',
+    className: 'hero--compact',
     actions: `${button({ label: 'Back to home', href: '/', variant: 'primary' })}${button({ label: 'See our services', href: '/services/', variant: 'secondary' })}`,
   })}`,
 });

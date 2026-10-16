@@ -5,11 +5,12 @@
  */
 import { esc, each } from '../lib/html.mjs';
 import { icon } from '../components/icons.mjs';
-import { button, eyebrow, sectionHead, serviceCard, feature, faqList, ctaBanner, avatar } from '../components/ui.mjs';
+import { button, sectionHead, serviceCard, feature, faqList, ctaBanner, avatar, pageHero, scrollCue } from '../components/ui.mjs';
+import { homeOrbit, homeClocks } from '../components/hero-visuals.mjs';
 import { faqSchema } from '../components/layout.mjs';
 import { services } from '../data/services.mjs';
 import { stats, clients, differentiators, process, testimonials, homeFaqs, industries } from '../data/content.mjs';
-import { regions, hub } from '../config.mjs';
+import { regions } from '../config.mjs';
 
 export const meta = {
   path: '/',
@@ -19,44 +20,20 @@ export const meta = {
 };
 
 function hero() {
-  const globeData = esc(JSON.stringify({ hub: hub.location, targets: regions.map((r) => r.location) }));
-  return `<section class="hero" aria-labelledby="hero-title">
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__glow hero__glow--lavender"></div>
-      <div class="hero__glow hero__glow--lime"></div>
-      <div class="hero__grid"></div>
-    </div>
-    <div class="container hero__inner">
-      <div class="hero__content">
-        ${eyebrow('Team online — working in your time zone', { dot: true })}
-        <h1 class="hero__title display" id="hero-title" data-split>Scale the business, <em class="accent">not</em> the headcount.</h1>
-        <p class="hero__sub" data-reveal>Akrostech is the backend operations partner for growing companies. Dedicated teams for engineering, recruiting, admin, finance and legal work — plugged into your tools and working your hours, so your people can focus on growth.</p>
-        <div class="hero__actions" data-reveal>
-          ${button({ label: 'Get Started', href: '/contact/', variant: 'primary', size: 'lg', attrs: 'data-cta="hero"' })}
-          ${button({ label: 'See Our Services', href: '#services', variant: 'secondary', size: 'lg', iconName: 'arrowDown' })}
-        </div>
-        <ul class="hero__trust" aria-label="At a glance" data-reveal>
-          <li><strong>5</strong> service pillars</li>
-          <li><strong>4</strong> regions, live hours</li>
-          <li><strong>NDA-first</strong> onboarding</li>
-        </ul>
-      </div>
-      <div class="hero__visual">
-        <div class="globe" data-globe="${globeData}" aria-hidden="true">
-          <div class="globe__poster"></div>
-          <canvas class="globe__canvas" data-globe-canvas></canvas>
-          <div class="globe__halo"></div>
-        </div>
-        <ul class="region-list" aria-label="Local time in the regions we cover" data-reveal>
-          ${each(regions, (r, i) => `<li class="region-list__item" data-region="${i}">
-            <span class="region-list__name">${esc(r.city)}</span>
-            <time class="region-list__time" data-tz="${esc(r.tz)}">--:--</time>
-          </li>`)}
-        </ul>
-      </div>
-    </div>
-    <a class="scroll-cue" href="#trusted" aria-label="Scroll to content"><span class="scroll-cue__label">Scroll</span><span class="scroll-cue__track"><span class="scroll-cue__thumb"></span></span></a>
-  </section>`;
+  const cycler = ['engineering', 'recruiting', 'admin', 'finance', 'legal'];
+  return pageHero({
+    variant: 'home',
+    kicker: 'Team online — working in your time zone',
+    badge: 'Live',
+    title: 'Scale the business, *not the headcount.*',
+    sub: 'Akrostech is the backend operations partner for growing companies. Dedicated teams for engineering, recruiting, admin, finance and legal work — plugged into your tools and working your hours, so your people can focus on growth.',
+    actions: `${button({ label: 'Get Started', href: '/contact/', variant: 'primary', size: 'lg', attrs: 'data-cta="hero"' })}${button({ label: 'See Our Services', href: '#services', variant: 'secondary', size: 'lg', iconName: 'arrowDown' })}`,
+    visual: homeOrbit(),
+    below: `<div class="container hero__below">
+      <p class="cycler" data-reveal>Your <span class="cycler__window" aria-hidden="true"><span class="cycler__word hl" data-cycler="${esc(cycler.join('|'))}">${cycler[0]}</span></span> backend, handled.<span class="visually-hidden"> Engineering, recruiting, admin, finance and legal.</span></p>
+      ${homeClocks()}
+    </div>${scrollCue('trusted')}`,
+  });
 }
 
 function trusted() {
@@ -126,7 +103,6 @@ function how() {
 
 function impact() {
   return `<section class="section impact" aria-labelledby="impact-title">
-    <div class="impact__bg" aria-hidden="true"></div>
     <div class="container">
       ${sectionHead({ kicker: '05 — The proof · Results', title: 'Built for teams that *move* fast.', lead: 'Numbers we’re proud of — and that we report on, every month, for every client.', id: 'impact-title' })}
       <dl class="stats" data-stagger>
